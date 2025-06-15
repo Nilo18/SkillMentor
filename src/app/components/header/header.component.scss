@@ -5,8 +5,17 @@
     align-items: center;
     height: 100px;
     border-bottom: 1px solid rgb(227, 227, 227);
+    background-color: rgb(227, 227, 227);
     padding-left: 50px;
     padding-right: 50px;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+
+    h1 {
+        user-select: none;
+        cursor: pointer;
+    }
 
     .leftSection {
         display: flex;

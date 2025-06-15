@@ -25,3 +25,22 @@
 .MentorBtn-Green:hover {
     filter: brightness(90%);
 }
+
+input {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+textarea {
+    padding: 10px
+}
+
+ul {
+  list-style-type: none;
+
+  li {
+    padding-left: 0;
+    margin-left: 0;
+  }
+}
+

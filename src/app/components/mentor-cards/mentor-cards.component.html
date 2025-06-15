@@ -1,6 +1,9 @@
-<app-header></app-header>
 <div class="cont">
     <div class="mentors">
+        <div class="mentors__Header">
+            <h3>მენტორები</h3>
+            <a routerLink="/mentors">ყველა –></a>
+        </div>
         <div class="mentorCards">
             <div *ngFor="let mentor of mentors">
                 <div class="mentorCard" (click)="MentorsService.selectMentor(mentor)">

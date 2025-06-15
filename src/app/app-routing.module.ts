@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'mentors', component: MentorsComponent },
-  { path: 'mentor', component: MentorComponent },
+  { path: 'mentor/:id', component: MentorComponent },
   { path: 'settings', component: SettingsComponent }
 ];
 

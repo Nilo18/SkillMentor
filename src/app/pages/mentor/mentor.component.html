@@ -1,0 +1,19 @@
+<app-header></app-header>
+<div class="cont">
+    <div class="mentorProfile">
+        <div class="mentorProfile__LeftSection">
+            <div class="mentorProfile__ImgHolder">
+                <img [src]="selectedMentor.image" alt="Chosen mentor image">
+            </div>
+            <div class="mentorProfile__Info">
+                <h1>{{selectedMentor.name}}</h1>
+                <p>{{selectedMentor.position}}</p>
+            </div>
+        </div>
+        <div class="mentorProfile__ContactInfo">
+            <p>{{selectedMentor.charge}}ლ</p>
+            <button class="MentorBtn-Green">შეხვედრის ჩანიშვნა</button>
+        </div>
+    </div>
+</div>
+<app-mentor-cards></app-mentor-cards>

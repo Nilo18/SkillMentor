@@ -2,25 +2,38 @@
 <div class="cont">
     <div class="settings">
         <div class="userInfo">
-            <h1>პროფილის ფოტო</h1>
-            <h1>სახელი</h1>
-            <h1>ელ–ფოსტა</h1>
-            <h1>პაროლი</h1>
-            <h1>პროფესია</h1>
+            <h1>პროფილის ფოტო:</h1>
+            <h1>სახელი:</h1>
+            <h1>ელ–ფოსტა:</h1>
+            <h1>პაროლი:</h1>
+            <h1>პროფესია:</h1>
             <h1></h1>
         </div>
         <div class="experience">
-            <ul>
+            <ul *ngFor="let Experience of experiences">
+                <li>{{Experience.company}}</li>
+                <li>{{Experience.position}}</li>
+                <li>{{Experience.description}}</li>
             </ul>
-            <div class="">
-                <label for="">კომპანია</label>
-                <input type="text" name="" id="">
-                <label for="">პოზიცია</label>
-                <input type="text">
-                <label for="">აღწერა</label>
-                <input type="text">
-                <button>დამატება</button>
-            </div>
+            <form (ngSubmit)="addExperience()" #experienceForm="ngForm">
+                <div class="resume">
+                    <div class="resume__company">
+                        <label for="Company">კომპანია</label>
+                        <input type="text" name="Company" [(ngModel)]="experience.company">
+                    </div>
+                    <div class="resume__position">
+                        <label for="Position">პოზიცია</label>
+                        <input type="text" name="Position" [(ngModel)]="experience.position">
+                    </div>
+                    <div class="resume__description">
+                        <label for="Description">აღწერა</label>
+                        <textarea name="Description" [(ngModel)]="experience.description"></textarea>
+                    </div>
+                    <div class="resume__ButtonHolder">
+                        <button class="MentorBtn-Green settingsBtn" [disabled]="!experienceForm.form.valid">დამატება</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
