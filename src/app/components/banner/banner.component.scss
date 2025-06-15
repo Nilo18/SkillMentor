@@ -1,8 +1,17 @@
 .cont {
+    background-color: #118577;
         .banner {
             width: 1200px;
             height: 600px;
             margin-bottom: 100px;
             border-bottom: 1px solid;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #118577;
+            
+            h1 {
+                color: white;
+            }
     }
 }
