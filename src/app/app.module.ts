@@ -13,6 +13,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { MentorsComponent } from './pages/mentors/mentors.component';
 import { MentorComponent } from './pages/mentor/mentor.component';
 import { RouterModule } from '@angular/router';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { RouterModule } from '@angular/router';
     SigninComponent,
     SignupComponent,
     MentorsComponent,
-    MentorComponent
+    MentorComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

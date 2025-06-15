@@ -5,13 +5,15 @@ import { SigninComponent } from './pages/signin/signin.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { MentorsComponent } from './pages/mentors/mentors.component';
 import { MentorComponent } from './pages/mentor/mentor.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'mentors', component: MentorsComponent },
-  { path: 'mentor', component: MentorComponent }
+  { path: 'mentor', component: MentorComponent },
+  { path: 'settings', component: SettingsComponent }
 ];
 
 
