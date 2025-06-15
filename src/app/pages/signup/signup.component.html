@@ -1,27 +1,52 @@
 <div class="cont for-signUp">
-    <div class="signup">
-        <div class="signupContent">
-            <div class="signupContent__Name">
-                <label for="Name">სახელი</label>
-                <input type="text">
+  <div class="signup">
+    <div class="signupContent">
+      
+      <div class="signupContent__Name">
+        <label for="Name">სახელი</label>
+        <input type="text" [(ngModel)]="name" name="name">
+        <p *ngIf="nameError">{{ nameError }}</p>
+        <p *ngIf="!nameError">&nbsp;</p>
+      </div>
+
+      <div class="signupContent__Email">
+        <label for="Email">ელ–ფოსტა</label>
+        <input type="text" [(ngModel)]="email" name="email">
+        <p *ngIf="emailError">{{ emailError }}</p>
+        <p *ngIf="!emailError">&nbsp;</p>
+      </div>
+
+      <div class="signupContent__Password">
+        <label for="Password">პაროლი</label>
+        <input type="password" [(ngModel)]="password" name="password">
+        <p *ngIf="passwordError">{{ passwordError }}</p>
+        <p *ngIf="!passwordError">&nbsp;</p>
+      </div>
+
+      <div class="signupContent__Specialty">
+        <label for="Specialty">პროფესია</label>
+        <input type="text" [(ngModel)]="specialty" name="specialty">
+        <p *ngIf="specialtyError">{{ specialtyError }}</p>
+        <p *ngIf="!specialtyError">&nbsp;</p>
+      </div>
+
+        <div class="signupContent__ProfileImg">
+            <label for="ProfileImg">პროფილის ფოტო</label>
+            
+            <!-- Hidden file input -->
+            <input type="file" id="ProfileImg" (change)="onFileSelected($event)" hidden>
+
+            <!-- Clickable area that triggers the file input -->
+            <div class="ProfileImgHolder" (click)="triggerFileInput()">
+                {{ selectedFileName || 'ატვირთეთ პროფილის სურათი' }}
             </div>
-            <div class="signupContent__Email">
-                <label for="Email">ელ–ფოსტა</label>
-                <input type="text">
-            </div>
-            <div class="signupContent__Password">
-                <label for="Password">პაროლი</label>
-                <input type="password">
-            </div>
-            <div class="signupContent__Specialty">
-                <label for="Specialty">პროფესია</label>
-                <input type="text">
-            </div>
-            <div class="signupContent__ProfileImg">
-                <label for="ProfileImg">პროფილის ფოტო</label>
-                <div class="ProfileImgHolder">ატვირთეთ პროფილის სურათი</div>
-            </div>
-            <button type="submit" class="MentorBtn-Green signupBtn">გაწევრიანება</button>
+
+            <p [class.error]="fileError">{{ fileError }}</p>
         </div>
+
+
+      <button type="submit" class="MentorBtn-Green signupBtn" (click)="submitForm()">გაწევრიანება</button>
+
     </div>
+  </div>
 </div>

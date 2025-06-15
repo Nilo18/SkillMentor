@@ -16,7 +16,6 @@ import { RouterModule } from '@angular/router';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { FormsModule } from '@angular/forms';
 import { MentorCardsComponent } from './components/mentor-cards/mentor-cards.component';
-// import { Router } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -31,7 +30,7 @@ import { MentorCardsComponent } from './components/mentor-cards/mentor-cards.com
     MentorsComponent,
     MentorComponent,
     SettingsComponent,
-    MentorCardsComponent
+    MentorCardsComponent,
   ],
   imports: [
     BrowserModule,
