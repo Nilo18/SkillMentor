@@ -1,0 +1,64 @@
+// cont ს ამატებს height: 100vh ს
+.for-signUp {
+    height: 100vh;
+    width: 100vw;   
+
+    .signup {
+        display: flex;
+        // flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 450px;
+        height: 500px;
+        border: 1px solid black;
+        padding-left: 35px;
+        padding-right: 35px;
+
+        // რეგისტრაციის ველების placeholder ია
+        .signupContent {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 15px;
+
+            .signupContent__Name, .signupContent__Email, .signupContent__Password, .signupContent__Specialty, .signupContent__ProfileImg {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .signupContent__ProfileImg {
+                .ProfileImgHolder {
+                    border: 1px dashed rgb(189, 189, 189);
+                    color: gray;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 50px;
+                    cursor: pointer;
+                    transition: 0.2s ease-in-out;
+                }
+
+                .ProfileImgHolder:hover {
+                    background-color: rgb(189, 189, 189);
+                    color: white;
+                }
+            }
+
+            .signupBtn {
+                width: auto;
+            }
+
+            input {
+                height: 30px;
+                border-radius: 6px;
+                border: 1px solid rgb(189, 189, 189);
+            }
+
+            label {
+                font-weight: bold;
+            }
+        }
+    }
+}
+
