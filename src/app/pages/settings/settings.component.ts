@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class SettingsComponent {
   experiences : any[] = []
+  currentUser : any
 
   experience = {
     company: '',
@@ -14,6 +15,12 @@ export class SettingsComponent {
     description: ''
   };
 
+  ngOnInit() {
+    const storedUser = localStorage.getItem('currentUser')
+      if (storedUser) {
+        this.currentUser = JSON.parse(storedUser);
+      }
+  }
 
   addExperience() {
     console.log('Experience added:', this.experience);

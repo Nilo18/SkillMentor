@@ -1,13 +1,13 @@
 <app-header></app-header>
 <div class="cont">
     <div class="settings">
-        <div class="userInfo">
-            <h1>პროფილის ფოტო:</h1>
-            <h1>სახელი:</h1>
-            <h1>ელ–ფოსტა:</h1>
-            <h1>პაროლი:</h1>
-            <h1>პროფესია:</h1>
-            <h1></h1>
+        <div class="userInfo" *ngIf="currentUser">
+            <img [src]="currentUser.profileImg" alt="Profile Image" class="profile-img"/>
+            
+            <h1>სახელი: {{ currentUser.name }}</h1>
+            <h1>ელ–ფოსტა: {{ currentUser.email }}</h1>
+            <h1>პაროლი: {{ '•'.repeat(currentUser.password.length) }}</h1>
+            <h1>პროფესია: {{ currentUser.specialty }}</h1>
         </div>
         <div class="experience">
             <ul *ngFor="let Experience of experiences">

@@ -3,8 +3,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     background-color: rgb(59, 58, 58);
     color: white;
+
     width: 100%;
-    height: 100px;
+    padding: 20px;
+
+    /* This makes it grow when content is short */
+    flex-shrink: 0;
 }

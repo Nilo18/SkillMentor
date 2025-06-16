@@ -1,16 +1,18 @@
 <div class="cont for-signIn">
-    <div class="signin">
-        <div class="signinContent">
-            <div class="signinContent__Email">
-                <label for="Email">ელ–ფოსტა</label>
-                <input type="text">
-            </div>
-            <div class="signinContent__Password">
-                <label for="Password">პაროლი</label>
-                <input type="password">
-            </div>
-            <a class="forgotPasswordBtn">დაგავიწყდა პაროლი?</a>
-            <button type="submit" class="MentorBtn-Green signinBtn">შესვლა</button>
-        </div>
+  <div class="signin">
+    <div class="signinContent">
+      <div class="signinContent__Email">
+        <label for="Email">ელ–ფოსტა</label>
+        <input type="text" [(ngModel)]="email">
+        <p class="error" *ngIf="emailError">{{ emailError }}</p>
+      </div>
+      <div class="signinContent__Password">
+        <label for="Password">პაროლი</label>
+        <input type="password" [(ngModel)]="password">
+        <p class="error" *ngIf="passwordError">{{ passwordError }}</p>
+      </div>
+      <a class="forgotPasswordBtn">დაგავიწყდა პაროლი?</a>
+      <button type="submit" class="MentorBtn-Green signinBtn" (click)="login()">შესვლა</button>
     </div>
+  </div>
 </div>

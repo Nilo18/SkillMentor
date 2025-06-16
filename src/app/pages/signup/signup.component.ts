@@ -53,16 +53,23 @@ export class SignupComponent {
     }
 
     if (valid) {
-      this.MentorDatabase.mentorsBase.push({
+      const newUser = {
         name: this.name,
         email: this.email,
         password: this.password,
         specialty: this.specialty,
         profileImg: this.profileImage
-      });
+      };
 
+      this.MentorDatabase.mentorsBase.push(newUser);
+
+      // Save updated mentor list
       localStorage.setItem('mentorsBase', JSON.stringify(this.MentorDatabase.mentorsBase));
-      console.log(this.MentorDatabase.mentorsBase)
+
+      // Save current user separately
+      localStorage.setItem('currentUser', JSON.stringify(newUser));
+
+      console.log(this.MentorDatabase.mentorsBase);
       this.router.navigate(['']);
       alert('წარმატებით გაიარეთ რეგისტრაცია!');
     }

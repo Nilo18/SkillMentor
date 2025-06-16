@@ -34,6 +34,18 @@
         .loginBtn:hover {
             filter: brightness(90%);
         }
+
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        button {
+            cursor: pointer;
+        }
     }
 
 }
