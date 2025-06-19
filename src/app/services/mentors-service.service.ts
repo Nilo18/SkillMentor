@@ -163,4 +163,8 @@ export class MentorsServiceService {
       localStorage.setItem('selectedMentor', JSON.stringify(mentor))
       this.router.navigate(['/mentor', mentor.id]);
     }
+
+    searchMentorByPosition(position : string) {
+      return this.mentors.find(mentor => mentor.position.toLowerCase() === position.toLowerCase())
+    }
 }

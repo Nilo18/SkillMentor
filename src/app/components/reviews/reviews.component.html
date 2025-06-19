@@ -1,0 +1,15 @@
+<div class="cont">
+    <div class="reviewsSummary">
+        <div *ngFor="let review of reviews">
+            <div class="reviewCard">
+                <div class="reviewCard__Header">
+                    <p>{{review.name}}</p>
+                    <img src="assets/fivestar.jpg" alt="reviewImage">
+                </div>
+                <div class="reviewCard__Content">
+                    <p>{{review.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

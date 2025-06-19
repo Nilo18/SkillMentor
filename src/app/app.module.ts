@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { FormsModule } from '@angular/forms';
 import { MentorCardsComponent } from './components/mentor-cards/mentor-cards.component';
+import { ReviewsComponent } from './components/reviews/reviews.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MentorCardsComponent } from './components/mentor-cards/mentor-cards.com
     MentorComponent,
     SettingsComponent,
     MentorCardsComponent,
+    ReviewsComponent,
   ],
   imports: [
     BrowserModule,

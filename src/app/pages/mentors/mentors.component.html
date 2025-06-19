@@ -1,20 +1,47 @@
 <app-header></app-header>
 <div class="cont">
     <div class="mentors">
+        <div class="searchBar">
+            <input type="text" placeholder="შეიყვანეთ სასურველი სპეციალობა" [(ngModel)]="searchKeyword">
+            <button class="MentorBtn-Green MentorBtn-Green-alt" (click)="submitSearch()">ძიება</button>
+        </div>
         <div class="mentorCards">
-            <div *ngFor="let mentor of mentors">
-                <div class="mentorCard" (click)="MentorsService.selectMentor(mentor)">
-                    <div class="mentorCard__Content">
-                        <div class="mentorCard__ProfileImg">
-                            <img [src]="mentor.image">
-                        </div>
-                        <div class="mentorCard__InfoHolder">
-                            <h1>{{mentor.name}}</h1>
-                            <p>{{mentor.position}}</p>
+            <ng-container *ngIf="!hasBeenSearched || searchKeyword === '' ">
+                <div *ngFor="let mentor of mentors">
+                    <div class="mentorCard" (click)="MentorsService.selectMentor(mentor)">
+                        <div class="mentorCard__Content">
+                            <div class="mentorCard__ProfileImg">
+                                <img [src]="mentor.image">
+                            </div>
+                            <div class="mentorCard__InfoHolder">
+                                <h1>{{mentor.name}}</h1>
+                                <p>{{mentor.position}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </ng-container>
+
+            <ng-container *ngIf="hasBeenSearched && searchKeyword !== ''">
+                <div *ngIf="searchResultFound; else showNoSearchResults">
+                    <div class="mentorCard" (click)="MentorsService.selectMentor(searchResult)">
+                        <div class="mentorCard__Content">
+                            <div class="mentorCard__ProfileImg">
+                                <img [src]="searchResult.image">
+                            </div>
+                            <div class="mentorCard__InfoHolder">
+                                <h1>{{searchResult.name}}</h1>
+                                <p>{{searchResult.position}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-template #showNoSearchResults>
+                <p>შედეგები ვერ მოიძებნა</p>
+            </ng-template>
+
         </div>
     </div>
 </div>
