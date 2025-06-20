@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MentorsServiceService } from '../../services/mentors-service.service';
+import { MentorDatabaseService } from '../../services/mentor-database.service';
 
 @Component({
   selector: 'app-mentors',
@@ -9,16 +10,34 @@ import { MentorsServiceService } from '../../services/mentors-service.service';
 export class MentorsComponent {
 
   mentors : any[] = []
+  newMentors : any[] = []
   typedKeyword: string = '';
   searchKeyword : string = ''
   searchResult : any
   searchResultFound : boolean = false;
   hasBeenSearched : boolean = false;
+  databaseMentorsWereAdded : boolean = false;
 
-  constructor(public MentorsService : MentorsServiceService) {}
+  constructor(public MentorsService : MentorsServiceService, public MentorDatabase : MentorDatabaseService) {}
 
   ngOnInit() {
+    const stored = localStorage.getItem('mentorsBase')
+    if (stored) {
+      this.newMentors = JSON.parse(stored)
+    }
     this.mentors = this.MentorsService.mentors // აქ ყველა უნდა აჩვენოს
+    
+    this.newMentors = this.MentorDatabase.mentorsBase
+    for (let newMentor of this.MentorDatabase.mentorsBase) {
+      const exists = this.mentors.find(mentor => mentor.id === newMentor.id) // Find if a mentor with this id already exists
+      // If it doesn't, add them to the local array to display
+      if (!exists) {
+        this.mentors.push(newMentor)
+      }
+    }
+
+    // console.log(this.mentors)
+    // console.log(this.newMentors)
   }
 
   submitSearch() {

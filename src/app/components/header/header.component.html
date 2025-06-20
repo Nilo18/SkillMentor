@@ -3,7 +3,7 @@
         <h1 routerLink="">SeeFuture</h1> <!--ცარიელია რო ჰოუმზე გადავიდეს-->
             <div class="leftSection"> 
                 <ng-container *ngIf="user; else showLoggedOut">
-                    <img [src]="user.profileImg" alt="Profile" class="profile-img" (click)="navigateToTheSettingsPage()"/>
+                    <img [src]="user.image" alt="Profile" class="profile-img" (click)="navigateToTheSettingsPage()"/>
                     <button (click)="logout()" class="MentorBtn-Green">გამოსვლა</button>
                 </ng-container>
                 

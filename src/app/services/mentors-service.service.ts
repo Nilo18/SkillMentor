@@ -155,8 +155,14 @@ export class MentorsServiceService {
       return this.mentors.slice(0, amount);
     }
 
+    getAllMentors(): any[] {
+      const stored = localStorage.getItem('mentorsBase');
+      const newMentors = stored ? JSON.parse(stored) : [];
+      return [...this.mentors, ...newMentors];
+    } 
+
     getMentorById(id: string) {
-      return this.mentors.find(mentor => mentor.id === id)
+      return this.getAllMentors().find(m => m.id == id);
     }
 
     selectMentor(mentor: any) {

@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { MentorDatabaseService } from '../../services/mentor-database.service';
 import { Router } from '@angular/router';
+import { MentorsServiceService } from '../../services/mentors-service.service';
 
 @Component({
   selector: 'app-signup',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
-  constructor(private MentorDatabase : MentorDatabaseService, private router: Router) {}
+  constructor(private MentorDatabase : MentorDatabaseService, private router: Router, public MentorsService : MentorsServiceService) {}
 
   name = '';
   email = '';
@@ -54,14 +55,17 @@ export class SignupComponent {
 
     if (valid) {
       const newUser = {
+        id: Date.now(),
         name: this.name,
         email: this.email,
         password: this.password,
-        specialty: this.specialty,
-        profileImg: this.profileImage
+        position: this.specialty,
+        image: this.profileImage,
+        charge: "50"
       };
 
       this.MentorDatabase.mentorsBase.push(newUser);
+      console.log(this.MentorDatabase.mentorsBase)
 
       // Save updated mentor list
       localStorage.setItem('mentorsBase', JSON.stringify(this.MentorDatabase.mentorsBase));
