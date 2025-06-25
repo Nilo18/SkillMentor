@@ -61,7 +61,8 @@ export class SignupComponent {
         password: this.password,
         position: this.specialty,
         image: this.profileImage,
-        charge: "50"
+        charge: "50",
+        experiences: []
       };
 
       this.MentorDatabase.mentorsBase.push(newUser);

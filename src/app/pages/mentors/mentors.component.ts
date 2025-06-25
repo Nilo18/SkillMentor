@@ -27,10 +27,10 @@ export class MentorsComponent {
     }
     this.mentors = this.MentorsService.mentors // აქ ყველა უნდა აჩვენოს
     
-    this.newMentors = this.MentorDatabase.mentorsBase
-    for (let newMentor of this.MentorDatabase.mentorsBase) {
+    // this.newMentors = this.MentorDatabase.mentorsBase
+    for (let newMentor of this.newMentors) {
       const exists = this.mentors.find(mentor => mentor.id === newMentor.id) // Find if a mentor with this id already exists
-      // If it doesn't, add them to the local array to display
+      // If it doesn't, add them to the local array to display, this process is needed to avoid duplication on the page
       if (!exists) {
         this.mentors.push(newMentor)
       }

@@ -1,18 +1,31 @@
 <app-header></app-header>
 <div class="cont">
     <div class="mentorProfile">
-        <div class="mentorProfile__LeftSection">
-            <div class="mentorProfile__ImgHolder">
-                <img [src]="selectedMentor.image" alt="Chosen mentor image">
+        <div class="mentorProfile__DataAndContact">
+            <div class="mentorProfile__LeftSection">
+                <div class="mentorProfile__ImgHolder">
+                    <img [src]="selectedMentor.image" alt="Chosen mentor image">
+                </div>
+                <div class="mentorProfile__Info">
+                    <h1>{{selectedMentor.name}}</h1>
+                    <p>{{selectedMentor.position}}</p>
+                </div>
             </div>
-            <div class="mentorProfile__Info">
-                <h1>{{selectedMentor.name}}</h1>
-                <p>{{selectedMentor.position}}</p>
+            <div class="mentorProfile__ContactInfo">
+                <p>{{selectedMentor.charge}}ლ</p>
+                <button class="MentorBtn-Green">შეხვედრის ჩანიშვნა</button>
             </div>
         </div>
-        <div class="mentorProfile__ContactInfo">
-            <p>{{selectedMentor.charge}}ლ</p>
-            <button class="MentorBtn-Green">შეხვედრის ჩანიშვნა</button>
+
+        <div class="mentorProfile__Experiences">
+            <h1>გამოცდილება</h1>
+            <div *ngFor="let experience of selectedMentor.experiences">
+                <div class="mentorProfile__experience">
+                    <h2>{{experience.company}}</h2>
+                    <h4>{{experience.position}}</h4>
+                    <p>{{experience.description}}</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

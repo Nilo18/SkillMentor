@@ -1,43 +1,68 @@
 .mentorProfile {
     display: flex;
+    flex-direction: column;
     margin-top: 150px;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    // align-items: center;
     width: 1200px;
     padding-bottom: 30px;
     border-bottom: 1px solid;
     margin-bottom: 50px;
 
-    .mentorProfile__LeftSection {
+    .mentorProfile__DataAndContact {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        gap: 25px;
-    }
 
-    .mentorProfile__ImgHolder {
-        img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-            cursor: pointer;
+        .mentorProfile__LeftSection {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .mentorProfile__ImgHolder {
+            img {
+                width: 150px;
+                height: 150px;
+                object-fit: cover;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+        }
+
+        .mentorProfile__ContactInfo {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+            p {
+                font-weight: bold;
+            }
+
+            button {
+                width: 150px;
+            }
         }
     }
 
-    .mentorProfile__ContactInfo {
+    .mentorProfile__Experiences {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
         gap: 10px;
 
-        p {
-            font-weight: bold;
-        }
+        // h1 {
+        //     // text-align: center;
+        // }
 
-        button {
-            width: 150px;
+        .mentorProfile__experience {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
     }
+
+
 }

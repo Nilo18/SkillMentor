@@ -16,7 +16,10 @@ export class MentorComponent {
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = params['id'];
-      this.selectedMentor = this.mentorsService.getMentorById(id);
+      this.selectedMentor = this.mentorsService.getMentorById(id); // This method unites newly registered mentors and fake mentors to search by id
+      console.log(this.selectedMentor)
+      console.log(JSON.parse(localStorage.getItem('currentUser') ?? 'null'));
+      console.log(JSON.parse(localStorage.getItem('mentorsBase')?? 'null'));
     });
   }
 }
