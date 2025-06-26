@@ -397,6 +397,7 @@ export class MentorsServiceService {
 
     getAllMentors(): any[] {
       const stored = localStorage.getItem('mentorsBase');
+      console.log('mentorsBase from mentorsService: ', stored? JSON.parse(stored) : [])
       const newMentors = stored ? JSON.parse(stored) : [];
       return [...this.mentors, ...newMentors];
     } 

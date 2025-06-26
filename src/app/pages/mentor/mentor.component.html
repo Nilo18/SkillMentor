@@ -18,12 +18,14 @@
         </div>
 
         <div class="mentorProfile__Experiences">
-            <h1>გამოცდილება</h1>
-            <div *ngFor="let experience of selectedMentor.experiences">
+            <!-- <h1>მიმოხილვა</h1> -->
+            <div *ngFor="let experience of selectedMentor.experiences; let index = index">
                 <div class="mentorProfile__experience">
                     <h2>{{experience.company}}</h2>
                     <h4>{{experience.position}}</h4>
                     <p>{{experience.description}}</p>
+                    <span>სექტემბერი 2021 – დეკემბერი 2023</span>
+                    <!-- <h3 *ngIf="shouldBeAbleToDelete" class="removeBtn" (click)="removeExperience(index)">X</h3> -->
                 </div>
             </div>
         </div>

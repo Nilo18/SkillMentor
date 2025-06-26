@@ -18,17 +18,31 @@ export class SettingsComponent {
   };
 
   ngOnInit() {
-    const storedUser = localStorage.getItem('currentUser')
-      if (storedUser) {
-        this.currentUser = JSON.parse(storedUser);
+    const storedUser = localStorage.getItem('currentUser');
+    const storedMentors = localStorage.getItem('mentorsBase');
 
-        // If the currentUser doesn't have experiences array, add it
-          if (!this.currentUser.hasOwnProperty('experiences')) {
-            this.currentUser.experiences = [];
-            localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-          }
+    if (storedUser && storedMentors) {
+      const mentors = JSON.parse(storedMentors);
+      const user = JSON.parse(storedUser);
+
+      // Find the fresh user data inside mentorsBase
+      const freshUser = mentors.find((m : any) => m.id === user.id);
+
+      if (freshUser) {
+        this.currentUser = freshUser;
+        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+      } else {
+        this.currentUser = user;
       }
+
+      // Ensure experiences array exists
+      if (!this.currentUser.hasOwnProperty('experiences')) {
+        this.currentUser.experiences = [];
+        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+      }
+    }
   }
+
 
   addExperience() {
     console.log('Experience added:', this.experience);
