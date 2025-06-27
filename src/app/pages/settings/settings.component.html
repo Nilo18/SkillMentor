@@ -15,26 +15,38 @@
                 <li>{{Experience.position}}</li>
                 <li>{{Experience.description}}</li>
             </ul>
-            <form (ngSubmit)="addExperience()" #experienceForm="ngForm">
+            <form (ngSubmit)="addExperience()" [formGroup]="experience">
                 <div class="resume">
                     <div class="resume__company">
                         <label for="Company">კომპანია</label>
-                        <input type="text" name="Company" [(ngModel)]="experience.company">
+                        <input type="text" name="Company" formControlName="company">
+                        <p class="error">
+                            {{ (experience.get('company')?.touched && experience.get('company')?.invalid) ?
+                             'გთხოვთ შეიყვანოთ კომპანიის ან დაწესებულების სახელი (2–70 სიმბოლო)' : ''}}
+                        </p>
                     </div>
                     <div class="resume__position">
                         <label for="Position">პოზიცია</label>
-                        <input type="text" name="Position" [(ngModel)]="experience.position">
+                        <input type="text" name="Position" formControlName="position">
+                        <p class="error">
+                            {{ (experience.get('position')?.touched && experience.get('position')?.invalid)?
+                             'გთხოვთ შეიყვანოთ თანამდებობა (2–50 სიმბოლო)' : '' }}
+                        </p>
                     </div>
                     <div class="resume__description">
                         <label for="Description">აღწერა</label>
-                        <textarea name="Description" [(ngModel)]="experience.description"></textarea>
+                        <textarea name="Description" formControlName="description"></textarea>
+                        <p class="error">{{ (experience.get('description')?.touched && experience.get('description')?.invalid)?
+                            'გთხოვთ შეიყვანოთ აღწერილობა (10–100 სიმბოლო)' : ''}}</p>
                     </div>
                     <div class="resume__ButtonHolder">
-                        <button class="MentorBtn-Green settingsBtn" [disabled]="!experienceForm.form.valid">დამატება</button>
+                        <button class="MentorBtn-Green settingsBtn">დამატება</button>
                     </div>
+                    <p class="error">{{textIsSpammy? 'გთხოვთ მოერიდოთ სპამს' : ''}}</p>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
+ 

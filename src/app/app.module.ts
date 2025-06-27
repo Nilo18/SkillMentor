@@ -17,6 +17,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { FormsModule } from '@angular/forms';
 import { MentorCardsComponent } from './components/mentor-cards/mentor-cards.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ReviewsComponent } from './components/reviews/reviews.component';
     AppRoutingModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

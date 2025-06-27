@@ -24,14 +24,17 @@ export class MentorComponent {
       const id = params['id'];
       // const storedMentorBase = localStorage.getItem('mentorsBase');
       // this.mentorsBaseLocal = storedMentorBase? JSON.parse(storedMentorBase) : []
+      // this.mentorsBaseLocal[2].experiences.splice(3, 1)
+      // localStorage.setItem('mentorsBase', JSON.stringify(this.mentorsBaseLocal))
       // console.log('mentorBase from mentor page: ', this.mentorsBaseLocal)
 
       this.selectedMentor = this.mentorsService.getMentorById(id); // This method unites newly registered mentors and fake mentors to search by id
-      // this.selectedMentor.experiences.forEach((experience : any) => {
-      //   if (experience.description.length >)
-      // });
+      // this.selectedMentor.experiences.splice(3, 1);
+
       const stored = localStorage.getItem('currentUser')
       this.currentUser = stored ? JSON.parse(stored) : null
+      // this.currentUser.experiences.splice(3, 1);
+      // localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
       if (this.currentUser !== null) {
         this.shouldBeAbleToDelete = this.currentUser.id === this.selectedMentor.id 
       }

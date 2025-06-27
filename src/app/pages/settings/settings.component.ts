@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { SpamValidatorService } from '../../services/spam-validator.service';
 
 @Component({
   selector: 'app-settings',
@@ -11,11 +13,26 @@ export class SettingsComponent {
   currentUser : any
   currentUserInDatabase : any
 
-  experience = {
-    company: '',
-    position: '',
-    description: ''
-  };
+  noSpamValidator() : ValidatorFn {
+    return (control: AbstractControl) : ValidationErrors | null => {
+      const value = control.value?.trim()
+
+      return null
+    }
+  }
+
+  experience: FormGroup; // This will be assigned when the form is built
+
+  // This builds the form and assigns it to a FormGroup
+  constructor(private fb: FormBuilder, private SpamValidator: SpamValidatorService) {
+    this.experience = fb.group({
+      company: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
+      position: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(150)]]
+    })
+  }
+
+  textIsSpammy: boolean = false;
 
   ngOnInit() {
     const storedUser = localStorage.getItem('currentUser');
@@ -43,30 +60,40 @@ export class SettingsComponent {
     }
   }
 
-
   addExperience() {
-    console.log('Experience added:', this.experience);
+    // Show all errors at once instead of separetely
+    if (this.experience.invalid) {
+      this.experience.markAllAsTouched()
+      return // Return to exit the function when showing errors
+    }
+
+    const experienceValue = this.experience.value
+    console.log('Experience added:', experienceValue);
     // Optionally push this.experience to an array and reset it:
-    this.currentUser.experiences.push({ ...this.experience })
-    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+  
+    if (!this.SpamValidator.isSpammyText(experienceValue)) {
+      this.currentUser.experiences.push({ ...experienceValue })
+      localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+      this.textIsSpammy = false
+    } else {
+      this.textIsSpammy = true;
+    }
 
     // Retrieve the mentor base
     const stored = localStorage.getItem('mentorsBase');
     this.mentorBaseLocal = stored? JSON.parse(stored) : []
 
+    // Find the current user in the mentor base by index
     const index = this.mentorBaseLocal.findIndex(m => m.id === this.currentUser.id)
-    // Find the current user in the mentor base
-    // this.currentUserInDatabase = this.mentorBaseLocal.find(mentor => mentor.id === this.currentUser.id)
+
     // If the current user was found update it's experiences base on the data current user has provided with
     if (index !== -1) {
       this.mentorBaseLocal[index] = { ...this.currentUser };
       localStorage.setItem('mentorsBase', JSON.stringify(this.mentorBaseLocal))
     }
 
-    
     // this.experiences.push({ ...this.experience });
     console.log(this.currentUser.experiences)
-    // localStorage.setItem('exp')
-    this.experience = { company: '', position: '', description: '' };
+    this.experience.reset()
   }
 }
