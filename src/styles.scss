@@ -1,7 +1,15 @@
 *{
     box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
+    font-family: 'BPG Nino Mtavruli', sans-serif;
+}
+
+@font-face {
+  font-family: 'BPG Nino Mtavruli';
+  src: url('assets/fonts/bpg_glaho_sylfaen.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 html, body {

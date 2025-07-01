@@ -12,6 +12,6 @@ export class MentorCardsComponent {
   constructor(public MentorsService : MentorsServiceService) {}
 
   ngOnInit() {
-    this.mentors = this.MentorsService.getMentorsByAmount(8) // მარტო 10 მენტორს წამოიღებს
+    this.mentors = this.MentorsService.getMentorsByAmount(8) // მარტო 8 მენტორს წამოიღებს
   }
 }

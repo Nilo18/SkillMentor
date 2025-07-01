@@ -4,15 +4,120 @@
             width: 1200px;
             height: 600px;
             margin-bottom: 100px;
-            border-bottom: 1px solid;
+            // border-bottom: 1px solid;
             display: flex;
+            // flex-direction: column;
             justify-content: center;
+            // gap: 100px;
             align-items: center;
             background-color: #118577;
             margin-top: 50px;
-            
-            h1 {
-                color: white;
+
+            .banner__ContentHolder {
+                margin-top: 100px;
+                width: 100%;
+                height: 400px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                // padding: 40px;
+                // align-items: center;
+
+                h1 {
+                    color: white;
+                    // margin-bottom: 100px;
+                }
+
+                .BannerBtn {
+                    background-color: rgb(255, 166, 0);
+                    color: #0a574e;
+                    padding: 12px;
+                    width: 140px;
+                    border: none;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-weight: bold;
+                    transition: 0.3s ease-in-out;
+                }
+
+                .BannerBtn:hover {
+                    filter: brightness(90%);
+                }
+
+                button {
+                    margin-top: 50px;
+                }
+
             }
     }
 }
+
+    // ---------------------- MOBILE (280px – 600px) ----------------------
+    @media (min-width: 280px) and (max-width: 599px) {
+        .banner {
+        height: auto;
+        padding: 40px 16px;
+
+        .banner__ContentHolder {
+            align-items: flex-start;
+
+                h1 {
+                    font-size: 17px;
+                }
+
+                .BannerBtn {
+                    font-size: 13px;
+                    // padding: 8px 14px;
+                    width: 100px;
+                    // height: 20px;
+                }
+            }
+        }
+    }
+
+    // ---------------------- TABLET (600px – 900px) ----------------------
+    @media (min-width: 600px) and (max-width: 899px) {
+        .banner {
+        height: 450px;
+        padding: 30px 24px;
+
+        .banner__ContentHolder {
+            h1 {
+            font-size: 26px;
+            }
+
+            .BannerBtn {
+            font-size: 14px;
+            padding: 10px 18px;
+            }
+        }
+        }
+    }
+
+    // ---------------------- LARGE TABLET / SMALL LAPTOP (900px – 1200px) ----------------------
+    @media (min-width: 900px) and (max-width: 1199.98px) {
+        .banner {
+        height: 500px;
+        padding: 40px;
+
+            .banner__ContentHolder {
+                h1 {
+                    font-size: 32px;
+                }
+
+                .BannerBtn {
+                    font-size: 15px;
+                    padding: 11px 20px;
+                }
+            }
+        }
+    }
+
+
+    @media (min-width: 1200px) {
+        .banner {
+            .banner__ContentHolder {
+                padding: 40px;
+            }
+        }
+    }
