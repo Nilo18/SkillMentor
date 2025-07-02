@@ -25,10 +25,6 @@
       color: #118577;
       text-decoration: none;
       font-weight: bold;
-
-      &:hover {
-        text-decoration: underline;
-      }
     }
   }
 
@@ -108,7 +104,7 @@
         align-items: center;
 
         .mentors__Header {
-            width: 600px;
+            width: 590px;
         }
 
         .mentorCards {
@@ -122,7 +118,7 @@
         align-items: center;
 
     .mentors__Header {
-        width: 350px;
+        width: 330px;
 
             h3 {
                 font-size: 20px;
@@ -134,12 +130,12 @@
     }
 
     .mentorCards {
-      grid-template-columns: 350px;
+      grid-template-columns: 280px;
       padding: 0 12px;
     }
 
     .mentorCard {
-      width: 100%;
+      width: 280px;
     //   height: 3500px;
     }
   }

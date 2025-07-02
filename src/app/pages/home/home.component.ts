@@ -7,7 +7,7 @@ import { MentorDatabaseService } from '../../services/mentor-database.service';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  loggedInUser: any = null; // should be a single object, not an array
+  loggedInUser: any = null; 
 
   constructor(private MentorDatabase: MentorDatabaseService) {}
 

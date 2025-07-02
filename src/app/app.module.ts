@@ -18,6 +18,8 @@ import { FormsModule } from '@angular/forms';
 import { MentorCardsComponent } from './components/mentor-cards/mentor-cards.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StatisticsComponent } from './components/statistics/statistics.component';
+import { CountUpModule } from 'ngx-countup';
 
 @NgModule({
   declarations: [
@@ -34,13 +36,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     SettingsComponent,
     MentorCardsComponent,
     ReviewsComponent,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CountUpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

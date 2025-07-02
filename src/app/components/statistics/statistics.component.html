@@ -1,0 +1,33 @@
+<div class="cont">
+    <div class="statistics fade-in" [class.visible]="visible" #statsRef>
+        <div class="statistics__StatHolder">
+            <i class="fa-duotone fa-solid fa-user-tie"></i>
+            <div class="statistics__StatHolder__Data">
+                <h1>{{displayedValues[0]}}+</h1>
+                <h1>მენტორი</h1>
+            </div>
+        </div>
+        <div class="statistics__StatHolder">
+            <i class="fa-solid fa-calendar-check"></i>
+            <div class="statistics__StatHolder__Data">
+                <h1>{{displayedValues[1]}}+</h1>
+                <h1>შესრულებული სესია</h1>
+            </div>
+        </div>
+        <div class="statistics__StatHolder">
+            <i class="fa-solid fa-layer-group"></i>
+            <div class="statistics__StatHolder__Data">
+                <h1>{{displayedValues[2]}}+</h1>
+                <h1>სპეციალობა</h1>
+            </div>
+        </div>
+        <div class="statistics__StatHolder">
+            <i class="fa-solid fa-face-smile-beam"></i>
+            <div class="statistics__StatHolder__Data">
+                <h1>{{displayedValues[3]}}+</h1>
+                <h1>კმაყოფილი მომხმარებელი</h1>
+            </div>
+        </div>
+    </div>
+</div>
+

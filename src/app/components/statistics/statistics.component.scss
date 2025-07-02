@@ -1,0 +1,119 @@
+.statistics {
+    display: grid;
+    max-width: 1200px;
+    grid-template-columns: repeat(2, 600px);
+    margin-top: 50px;
+    margin-bottom: 50px;
+    row-gap: 50px;
+    box-sizing: border-box;
+
+    .statistics__StatHolder {
+        width: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        // border: 1px solid;
+
+        i {
+            font-size: 55px;
+            color: #18b5a3;
+        }
+
+        h1 {
+            font-size: 25px;
+        }
+
+        .statistics__StatHolder__Data {
+            text-align: center;
+        }
+    }
+}
+
+// This is the base class for the component
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
+}
+
+// This is the class it will be assigned when the component comes into view
+// Together with .fade-in it creates a fading in animation
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+@media (min-width: 900px) and (max-width: 1199.98px) {
+  .statistics {
+    max-width: 900px;
+    grid-template-columns: repeat(2, 450px);
+    row-gap: 40px;
+    padding-right: 15px;
+    justify-content: center;
+    align-items: center;
+    // column-gap: 20px;
+
+    .statistics__StatHolder {
+      width: 450px;
+
+      i {
+        font-size: 45px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+    }
+  }
+}
+
+// 600px – 899px → tablet / landscape phone
+@media (min-width: 600px) and (max-width: 899.98px) {
+    .statistics {
+        max-width: 600px;
+        grid-template-columns: repeat(2, 300px);
+        row-gap: 40px;
+        padding-right: 50px;
+        justify-content: center;
+        align-items: center;
+
+        .statistics__StatHolder {
+        width: 300px;
+        justify-content: center;
+        align-items: center;
+
+            i {
+                font-size: 40px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+// 280px – 599px → mobile
+@media (min-width: 280px) and (max-width: 599.98px) {
+  .statistics {
+    max-width: 100%;
+    grid-template-columns: repeat(1, 100%);
+    row-gap: 30px;
+    padding: 0 16px;
+
+    .statistics__StatHolder {
+      width: 100%;
+
+      i {
+        font-size: 32px;
+      }
+
+      h1 {
+        font-size: 18px;
+      }
+    }
+  }
+}
