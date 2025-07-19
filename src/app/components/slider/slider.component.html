@@ -1,0 +1,13 @@
+<div class="cont">
+    <div class="slider">
+        <div class="slides">
+            <img [src]="slides[currentIndex].img" alt="Slider image">
+            <div class="bottom-shade">
+                <p>{{slides[currentIndex].text}}</p>
+            </div>     
+        </div>
+        <button class="prev" (click)="next()">&#10094;</button>
+        <button class="next" (click)="prev()">&#10095;</button>
+    </div>
+</div>
+

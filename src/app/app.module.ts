@@ -20,6 +20,7 @@ import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { CountUpModule } from 'ngx-countup';
+import { SliderComponent } from './components/slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { CountUpModule } from 'ngx-countup';
     MentorCardsComponent,
     ReviewsComponent,
     StatisticsComponent,
+    SliderComponent,
   ],
   imports: [
     BrowserModule,

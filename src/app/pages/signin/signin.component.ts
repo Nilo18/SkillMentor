@@ -23,7 +23,7 @@ export class SigninComponent {
     this.passwordError = '';
 
     if (!this.email.trim()) {
-      this.emailError = 'გთხოვთ მიუთითეთ ელ–ფოსტა';
+      this.emailError = 'გთხოვთ მიუთითოთ ელ–ფოსტა';
       return;
     }
 
