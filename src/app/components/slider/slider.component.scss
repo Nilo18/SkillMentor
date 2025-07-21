@@ -36,6 +36,7 @@
                     color: white;
                     font-size: 20px;
                     cursor: pointer;
+                    user-select: none;
                 }
         }
     }
@@ -54,6 +55,22 @@
 
     .next {
         right: 20px;
+    }
+}
+
+.visible {
+    animation: sliderFadeIn 2s;
+}
+
+@keyframes sliderFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 

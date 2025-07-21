@@ -9,7 +9,8 @@
         // flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 600px;
+        max-width: 600px;
+        width: 100%;
         height: 605px;
         border: 1px solid #ddd;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -69,6 +70,34 @@
             label {
                 font-weight: bold;
             }
+        }
+    }
+
+    @media(min-width: 900px) and (max-width: 1199.98px) {
+        .signup {
+            width: 500px;
+            height: 560px;
+
+            .signupContent__Name, .signupContent__Email, .signupContent__Password, .signupContent__Specialty, .signupContent__ProfileImg {
+                p {
+                    font-size: 9px;
+                }
+            }
+        }
+    }
+
+    @media(min-width: 600px) and (max-width: 899.98px) {
+        .signup {
+            width: 400px;
+            height: 560px;
+        }
+    }
+
+    @media (min-width: 280px) and (max-width: 599.98px) {
+        .signup {
+            width: 300px;
+            padding-right: 30px;
+            padding-left: 30px;
         }
     }
 }

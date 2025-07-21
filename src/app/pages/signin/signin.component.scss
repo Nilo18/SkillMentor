@@ -57,5 +57,33 @@
             }
         }
     }
+
+    @media(min-width: 900px) and (max-width: 1199.98px) {
+        .signin {
+            width: 500px;
+            height: 320px;
+
+            .signinContent__Email, .signinContent__Password {
+                p {
+                    font-size: 9px;
+                }
+            }
+        }
+    }
+
+    @media(min-width: 600px) and (max-width: 899.98px) {
+        .signin {
+            width: 400px;
+            height: 320px;
+        }
+    }
+
+    @media (min-width: 280px) and (max-width: 599.98px) {
+        .signin {
+            width: 300px;
+            padding-right: 30px;
+            padding-left: 30px;
+        }
+    }
 }
 

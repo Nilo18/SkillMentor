@@ -1,4 +1,4 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, PLATFORM_ID, ViewChild, ElementRef } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -27,12 +27,15 @@ export class SliderComponent {
   ]
 
   constructor(@Inject(PLATFORM_ID) private platformid: Object) {}
+  private observer!: IntersectionObserver;
+  @ViewChild('sliderRef') slider!: ElementRef
 
   currentIndex: number = 0;
   intervalId: any
   nextWasClicked: boolean = false; // This flag will be used to avoid auto moving and next button running at the same time
   btnWasClicked: boolean = false // This flag will be used to avoid spam clicking next or prev buttons
   i: number = 1;
+  visible: boolean = false; // A flag to control when the component comes into view
 
   next() {
     if (!this.btnWasClicked) {
@@ -77,7 +80,23 @@ export class SliderComponent {
     }
   }
 
+  ngAfterViewInit() {
+    this.observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.visible = true;
+        }
+      })
+    }), {
+      treshold: 0.3
+    }
+    this.observer.observe(this.slider.nativeElement)
+  }
+
   ngOnDestroy() {
     clearInterval(this.intervalId);
+    if (this.observer) {
+      this.observer.disconnect()
+    }
   }
 }

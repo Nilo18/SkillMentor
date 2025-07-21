@@ -52,6 +52,22 @@
     }
 }
 
+.visible {
+    animation: bannerFadeIn 2s;
+}
+
+@keyframes bannerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
     // ---------------------- MOBILE (280px – 600px) ----------------------
     @media (min-width: 280px) and (max-width: 599px) {
         .banner {
