@@ -49,7 +49,6 @@ export class SliderComponent {
     }
   }
  
-
   prev() {
     if (!this.btnWasClicked) {
       this.currentIndex = (this.currentIndex === 0)? this.slides.length - 1 : this.currentIndex - 1;

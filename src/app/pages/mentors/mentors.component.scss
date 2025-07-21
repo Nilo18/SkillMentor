@@ -1,6 +1,8 @@
 .mentors {
     display: flex;
     flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
     gap: 20px;
     width: 1200px;
     margin-top: 150px;
@@ -13,12 +15,17 @@
         input {
             width: 1100px;
             height: 30px;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            border: 1px solid #a7a7a7;
         }
 
         .MentorBtn-Green-alt {
             height: 30px;
             width: 100px;
             padding: 0;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
         }
     }
 
@@ -29,7 +36,7 @@
 
     .mentorCards {
         display: grid;
-        grid-template-columns: 280px 280px 280px 280px;
+        grid-template-columns: repeat(4, 280px);
         row-gap: 20px;
         column-gap: 26px;
         margin-bottom: 50px;
@@ -76,3 +83,91 @@
     }
 }
 
+@media (min-width: 900px) and (max-width: 1199.98px) {
+    .mentors {
+        width: 892px;
+        margin-right: 3px; // Add some extra margin to the right to make sure that the white spaces to the side are rendered well
+        // This issue appears of the sum of the remaining white spaces to the sides is an odd number
+        // If it is an odd number it can't be divided perfectly by 2 so the browser rounds the divided numbers
+        // This is causes uneven whitespaces to the sides
+
+        .searchBar {
+
+            input {
+                width: 792px;
+                height: 30px;
+            }
+
+            .MentorBtn-Green-alt {
+                height: 30px;
+                width: 100px;
+                padding: 0;
+            }
+        }
+
+        .mentorCards {
+            grid-template-columns: repeat(3, 280px);
+
+            .mentorCard {
+                width: 280px;
+            }
+        }
+    }
+}
+
+@media (min-width: 600px) and (max-width: 899.98px) {
+    .mentors {
+        width: 586px;
+
+        .searchBar {
+
+            input {
+                width: 486px;
+                height: 30px;
+            }
+
+            .MentorBtn-Green-alt {
+                height: 30px;
+                width: 100px;
+                padding: 0;
+            }
+        }
+
+        .mentorCards {
+            grid-template-columns: repeat(2, 280px);
+
+            .mentorCard {
+                width: 280px;
+            }
+        }
+    }
+}
+
+@media (min-width: 280px) and (max-width: 599.98px) {
+    .mentors {
+        width: 260px;
+
+        .searchBar {
+            input {
+                width: 200px;
+                height: 30px;
+                font-size: 11px;
+                // color: white;
+            }
+
+            .MentorBtn-Green-alt {
+                height: 30px;
+                width: 60px;
+                padding: 0;
+            }
+        }
+
+        .mentorCards {
+            grid-template-columns: 260px;
+
+            .mentorCard {
+                width: 260px;
+            }
+        }
+    }
+}
