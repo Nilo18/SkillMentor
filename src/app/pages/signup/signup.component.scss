@@ -1,7 +1,8 @@
 // cont ს ამატებს height: 100vh ს
 .for-signUp {
     height: 100vh;
-    width: 100vw;   
+    width: 100vw;
+    background-color: rgb(244, 244, 244);   
 
     .signup {
         display: flex;
@@ -10,9 +11,11 @@
         align-items: center;
         width: 600px;
         height: 605px;
-        border: 1px solid black;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         padding-left: 35px;
         padding-right: 35px;
+        background-color: white;
 
         // რეგისტრაციის ველების placeholder ია
         .signupContent {

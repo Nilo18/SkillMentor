@@ -71,6 +71,7 @@ export class SliderComponent {
   }
 
   ngOnInit() {
+    // Make sure that the slider is run only in browser
     if (isPlatformBrowser(this.platformid)) {
       this.autoMoveSlide()
     }
