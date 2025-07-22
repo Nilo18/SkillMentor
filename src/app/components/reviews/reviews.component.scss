@@ -34,3 +34,42 @@
     }
 // }
 
+@media (min-width: 900px) and (max-width: 1199.98px) {
+    .reviewsSummary {
+        width: 880px;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 899.98px) {
+    .reviewsSummary {
+        width: 580px;
+    }
+}
+
+@media (min-width: 280px) and (max-width: 599.98px) {
+    .reviewsSummary {
+        width: 280px;
+
+        .reviewCard {
+            .reviewCard__Header {
+                flex-direction: column;
+                gap: 0;
+
+                p {
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+
+                img {
+                    width: 150px;
+                    height: 30px;
+                    object-fit: cover;
+                }
+            }
+
+            p {
+                text-align: center;
+            }
+        }
+    }
+}

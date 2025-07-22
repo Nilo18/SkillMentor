@@ -79,13 +79,14 @@
 
   // ------------------- LARGE TABLET / SMALL LAPTOP (900px–1199px) -------------------
   @media (min-width: 900px) and (max-width: 1199.98px) {
-    .mentors {
-            padding-left: 30px;
-            padding-right: 30px;
+    // .mentors {
+            // padding-left: 30px;
+            // padding-right: 30px;
+            width: 892px;
         
 
         .mentors__Header {
-            width: 890px;
+            width: 892px;
             justify-self: center;
             align-self: center;
         }
@@ -93,8 +94,12 @@
         .mentorCards {
             grid-template-columns: repeat(3, 280px);
             justify-content: center;
+
+            .mentorCard {
+              width: 280px;
+            }
         }
-    }
+    // }
 
   }
 

@@ -5,7 +5,8 @@
     margin-top: 150px;
     justify-content: center;
     // align-items: center;
-    width: 1200px;
+    max-width: 1200px;
+    width: 100%;
     padding-bottom: 30px;
     border-bottom: 1px solid;
     margin-bottom: 50px;
@@ -63,57 +64,169 @@
 
         .mentorProfile__experience {
             display: flex;
-            flex-direction: column;
-            // justify-content: center;
-            // align-items: center;
+            // flex-direction: column;
+            justify-content: center;
+            align-items: center;
             border: 1px solid #ddd;
             border-radius: 8px;
             width: auto;
-            height: 200px;
-            gap: 10px;
-            padding: 10px;
+            height: auto;
+            // gap: 10px;
+            padding: 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // base shadow
             cursor: pointer;
             position: relative;
 
-            h2 {
-                font-size: 22px;
-            }
+            
+            .mentorProfile__experience__contentHolder {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                gap: 10px; 
+                // justify-content: center;
+                // align-items: center;
 
-            span {
-                border-top: 1px solid;
-                color: #118577;
-            }
+                h2 {
+                    font-size: 19px;
+                }
 
-            p {
-                display: -webkit-box;
-                -webkit-box-orient: vertical;
-                -webkit-line-clamp: 3;
+                span {
+                    border-top: 1px solid;
+                    color: #118577;
+                }
 
-                display: box;
-                box-orient: vertical;
-                line-clamp: 3;
+                // p {
+                    // display: -webkit-box;
+                    // -webkit-box-orient: vertical;
+                    // -webkit-line-clamp: 3;
 
-                overflow: hidden;
-                margin-bottom: 5px;
-                width: auto;
-            }
+                    // display: box;
+                    // box-orient: vertical;
+                    // line-clamp: 3;
 
-            .removeBtn {
-                position: absolute;
-                top: 0;
-                right: 10px;
-                // display: none;
-            }
+                    // overflow: hidden;
+                    // margin-bottom: 5px;
+                    // width: auto;
+                // }
 
-            .mentorProfile__experience:hover {
                 .removeBtn {
-                    // display: block;
-                    color: red;
+                    position: absolute;
+                    top: 0;
+                    right: 10px;
+                    // display: none;
+                }
+
+                .mentorProfile__experience:hover {
+                    .removeBtn {
+                        // display: block;
+                        color: red;
+                    }
                 }
             }
+
+
         }
     }
 
 
 }
+
+@media (min-width: 900px) and (max-width: 1199.98px) {
+    .mentorProfile {
+        width: 880px;
+
+        .mentorProfile__Experiences {
+            // grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+   
+            .mentorProfile__experience {
+
+
+                h2 {
+                    font-size: 18px;
+                }
+
+                p {
+                //     display: -webkit-box;
+                //     -webkit-box-orient: vertical;
+                //     -webkit-line-clamp: 3;
+
+                //     display: box;
+                //     box-orient: vertical;
+                //     line-clamp: 3;
+
+                //     overflow: hidden;
+                //     margin-bottom: 5px;
+                //     width: auto;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 600px) and (max-width: 899.98px) {
+    .mentorProfile {
+        width: 580px;
+
+        .mentorProfile__Experiences {
+            // grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+   
+            .mentorProfile__experience {
+                h2 {
+                    font-size: 16px;
+                }
+
+                p {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 280px) and (max-width: 599.98px) {
+    .mentorProfile {
+        width: 280px;
+
+        .mentorProfile__DataAndContact {
+            flex-direction: column;
+
+            .mentorProfile__LeftSection {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .mentorProfile__ContactInfo {
+                button {
+                    width: 280px;
+                    font-size: 16px;
+                }
+            }
+        }
+
+        .mentorProfile__Experiences {
+            // grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+   
+            .mentorProfile__experience {
+                .mentorProfile__experience__contentHolder {
+                    h2 {
+                        font-size: 16px;
+                    }
+
+                    p {
+                        font-size: 14px;
+                        // flex: 1;
+                    }
+
+                    span {
+                        font-size: 14px;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
