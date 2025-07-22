@@ -9,6 +9,7 @@ import { MentorsServiceService } from '../../services/mentors-service.service';
 export class MentorCardsComponent {
   mentors : any[] = []
   visible: boolean = false
+  animationHasRun: boolean = false;
 
   constructor(public MentorsService : MentorsServiceService) {}
 
@@ -21,17 +22,18 @@ export class MentorCardsComponent {
 
   ngAfterViewInit() {
     // Initialize the observer
-    this.observer = new IntersectionObserver(entries => {
-      // For each entry check if it is intersecting
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          this.visible = true // If it is mark visible flag as true
-          console.log(this.visible)
-        }
-      })
-    }), {
-      threshold: 0.3
-    }
+  this.observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !this.animationHasRun) {
+        this.visible = true;
+        this.animationHasRun = true
+        console.log(this.visible);
+        this.observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.3
+  });
     this.observer.observe(this.mentorCards.nativeElement) // Observe for the mentorCards native element
   }
 

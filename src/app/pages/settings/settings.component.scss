@@ -2,10 +2,14 @@
     background-color: rgb(244, 244, 244);
     
     .settings {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+
             .userInfo {
-                margin-top: 40px;
                 padding: 40px;
-                height: 600px;
+                min-height: 600px; // or remove it entirely
+                height: auto;
                 width: 1200px;
                 background-color: white;
                 border-radius: 20px;
@@ -23,6 +27,17 @@
                     height: 150px;
                     cursor: pointer;
                 }
+
+                .userInfo__Name, .userInfo__Email, .userInfo__Password, .userInfo__Specialty {
+                    display: flex;
+                    gap: 10px;
+
+                    p {
+                        align-self: center;
+                        font-size: 20px;
+                    }
+                }
+
             }
 
             .experience {
@@ -72,12 +87,77 @@
 
                     input {
                         height: 30px;
+                        border: 1px solid #b5b5b5;
                     }
 
                     textarea {
                         height: 100px;
                         resize: none;
+                        border: 1px solid #b5b5b5;
                     }
+                }
+            }
+        }
+
+        @media (min-width: 900px) and (max-width: 1199.98px) {
+            .settings {
+                height: 100%;
+
+                .userInfo {
+                    width: 880px;
+                }
+
+                .experience {
+                    width: 880px;
+                }
+            }
+        }
+
+        @media (min-width: 600px) and (max-width: 899.98px) {
+            .settings {
+                // height: 100%;
+            
+                    .userInfo {
+                        width: 580px;
+                    }
+
+                    .experience {
+                        width: 580px;
+                    }
+            }
+        }
+
+        @media (min-width: 280px) and (max-width: 599.98px) {
+            .settings {
+                .userInfo {
+                    width: 280px;
+                    padding: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 20px;
+
+                    h1 {
+                        font-size: 20px;
+                    }
+
+                    img {
+                        width: 100px;
+                        height: 100px;
+                    }
+                    
+
+                    .userInfo__Name, .userInfo__Email, .userInfo__Password, .userInfo__Specialty {
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                }
+
+                .experience {
+                    width: 280px;
                 }
             }
         }

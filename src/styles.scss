@@ -14,6 +14,8 @@
 
 html, body {
     height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 app-root {
@@ -23,6 +25,7 @@ app-root {
 }
 
 .cont {
+    min-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,14 +65,31 @@ ul {
   }
 }
 
+// This is a page wrapper to ensure that the page stretches into the full viewport
 .page-wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
+// This is the content holder which will be inside the page wrapper, it will make the content stretch
+// Together with page-wrapper they ensure that the page doesn't leave any white spaces below it 
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
+
+// This is a base class for the component, it starts with opacity 0
+  .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: 1s ease-out;
+  }
+
+  // This will be applied once the component comes into view the opacity will change to 1
+  // This will manually simulate the fade in animation and it will be in sync with the component's income to view
+  .visible {
+      opacity: 1;
+      transform: translateY(0);
+  }

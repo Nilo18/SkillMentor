@@ -3,11 +3,23 @@
     <div class="settings">
         <div class="userInfo" *ngIf="currentUser">
             <img [src]="currentUser.image" alt="Profile Image" class="profile-img"/>
+            <div class="userInfo__Name">
+                <h1>სახელი:</h1>
+                <p>{{ currentUser.name }}</p>
+            </div>
+            <div class="userInfo__Email">
+                <h1>ელ–ფოსტა:</h1>
+                <p>{{ currentUser.email }}</p>
+            </div>
+            <div class="userInfo__Password">
+                <h1>პაროლი:</h1>
+                <p>{{ '•'.repeat(currentUser.password.length) }}</p>
+            </div>
+            <div class="userInfo__Specialty">
+                <h1>პროფესია:</h1>
+                <p>{{ currentUser.position }}</p>
+            </div>
             
-            <h1>სახელი: {{ currentUser.name }}</h1>
-            <h1>ელ–ფოსტა: {{ currentUser.email }}</h1>
-            <h1>პაროლი: {{ '•'.repeat(currentUser.password.length) }}</h1>
-            <h1>პროფესია: {{ currentUser.position }}</h1>
         </div>
         <div class="experience">
             <ul *ngFor="let Experience of experiences">
