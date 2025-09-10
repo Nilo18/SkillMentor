@@ -44,6 +44,9 @@
                         <p>შედეგები ვერ მოიძებნა</p>
                     </ng-template>
 
+                    <ng-container *ngIf="mentors.length === 0">
+                        <p>იტვირთება...</p>
+                    </ng-container>
                 </div>
             </div>
         </div>

@@ -20,24 +20,15 @@ export class MentorsComponent {
 
   constructor(public MentorsService : MentorsServiceService, public MentorDatabase : MentorDatabaseService) {}
 
-  ngOnInit() {
-    const stored = localStorage.getItem('mentorsBase')
-    if (stored) {
-      this.newMentors = JSON.parse(stored)
-    }
-    this.mentors = this.MentorsService.mentors // აქ ყველა უნდა აჩვენოს
-    
-    // this.newMentors = this.MentorDatabase.mentorsBase
-    for (let newMentor of this.newMentors) {
-      const exists = this.mentors.find(mentor => mentor.id === newMentor.id) // Find if a mentor with this id already exists
-      // If it doesn't, add them to the local array to display, this process is needed to avoid duplication on the page
-      if (!exists) {
-        this.mentors.push(newMentor)
-      }
-    }
-
-    // console.log(this.mentors)
-    // console.log(this.newMentors)
+  async ngOnInit() {
+    // const stored = localStorage.getItem('mentorsBase')
+    // if (stored) {
+    //   this.newMentors = JSON.parse(stored)
+    // }
+    // this.mentors = this.MentorsService.mentors // აქ ყველა უნდა აჩვენოს
+    const res = await this.MentorsService.getAllMentors()
+    this.mentors = res
+    console.log(this.mentors)
   }
 
   submitSearch() {

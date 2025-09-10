@@ -16,32 +16,25 @@ export class MentorComponent {
   experienceWasDeleted : boolean = false
   currentUser : any;
   mentorsBaseLocal : any[] = []
+  // isLoading
 
   constructor (private route: ActivatedRoute, private mentorsService: MentorsServiceService) {}
 
-  ngOnInit() {
-    this.route.params.subscribe(params => {
+  async ngOnInit() {
+    this.route.params.subscribe(async (params) => {
       const id = params['id'];
-      // const storedMentorBase = localStorage.getItem('mentorsBase');
-      // this.mentorsBaseLocal = storedMentorBase? JSON.parse(storedMentorBase) : []
-      // this.mentorsBaseLocal[2].experiences.splice(3, 1)
-      // localStorage.setItem('mentorsBase', JSON.stringify(this.mentorsBaseLocal))
-      // console.log('mentorBase from mentor page: ', this.mentorsBaseLocal)
 
-      this.selectedMentor = this.mentorsService.getMentorById(id); // This method unites newly registered mentors and fake mentors to search by id
-      // this.selectedMentor.experiences.splice(3, 1);
+      this.selectedMentor = await this.mentorsService.getMentorById(id); // This method unites newly registered mentors and fake mentors to search by id
 
       const stored = localStorage.getItem('currentUser')
       this.currentUser = stored ? JSON.parse(stored) : null
-      // this.currentUser.experiences.splice(3, 1);
-      // localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
       if (this.currentUser !== null) {
         this.shouldBeAbleToDelete = this.currentUser.id === this.selectedMentor.id 
       }
 
-      console.log(this.selectedMentor)
+      console.log('The selected mentor is: ', this.selectedMentor)
+      console.log('His profile image is: ', this.selectedMentor.image)
       console.log(JSON.parse(localStorage.getItem('currentUser') ?? 'null'));
-      // console.log(JSON.parse(localStorage.getItem('mentorsBase')?? 'null'));
     });
   }
 

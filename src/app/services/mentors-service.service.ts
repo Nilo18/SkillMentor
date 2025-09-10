@@ -427,20 +427,31 @@ export class MentorsServiceService {
       }
     }
 
-    getAllMentors(): any[] {
-      const stored = localStorage.getItem('mentorsBase');
-      console.log('mentorsBase from mentorsService: ', stored? JSON.parse(stored) : [])
-      const newMentors = stored ? JSON.parse(stored) : [];
-      return [...this.mentors, ...newMentors];
+    async getAllMentors(): Promise<any> {
+      try {
+        const res = await firstValueFrom(this.http.get<MentorsResponse>(`${this.baseURL}/mentors`))
+        console.log(res)
+        return res
+      } catch (err) {
+        console.log("Failed to get all the mentors: ", err)
+        throw err
+      }
     } 
 
-    getMentorById(id: string) {
-      return this.getAllMentors().find(m => m.id == id);
+    async getMentorById(id: string) : Promise<Mentor> {
+      try {
+        const res = firstValueFrom(this.http.get<Mentor>(`${this.baseURL}/mentors/${id}`))
+        return res
+      } catch (err) {
+        console.log('Failed to get mentor by id: ', err)
+        throw err
+      }
+      // return this.getAllMentors().mentorsData.find(m => m.id == id);
     }
 
     selectMentor(mentor: any) {
-      localStorage.setItem('selectedMentor', JSON.stringify(mentor))
-      this.router.navigate(['/mentor', mentor.id]);
+      // localStorage.setItem('selectedMentor', JSON.stringify(mentor))
+      this.router.navigate(['/mentor', mentor._id]);
     }
 
     searchMentorByPosition(position : string) {
