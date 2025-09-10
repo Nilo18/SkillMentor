@@ -21,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { CountUpModule } from 'ngx-countup';
 import { SliderComponent } from './components/slider/slider.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { SliderComponent } from './components/slider/slider.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    CountUpModule
+    CountUpModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

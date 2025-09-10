@@ -1,12 +1,35 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
+
+interface Experience {
+  company: string,
+  position: string,
+  description: string,
+}
+
+interface Mentor {
+  _id: string;
+  id: string;
+  name: string;
+  image: string;
+  position: string;
+  charge: string;
+  experiences: Experience[]
+}
+
+interface MentorsResponse {
+  mentorsData: Mentor[]
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class MentorsServiceService {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
+  private baseURL = 'https://skillmentor-back-production.up.railway.app'
 
     mentors: any[] = [
       {
@@ -391,8 +414,17 @@ export class MentorsServiceService {
       }
     ];
 
-    getMentorsByAmount(amount: number): any[] {
-      return this.mentors.slice(0, amount);
+    // Specify the return type so that typescript knows that we're returning an array
+    async getMentorsByAmount(amount: number) : Promise<MentorsResponse> {
+      // return this.mentors.slice(0, amount);
+      try {
+        // Wrap amount in curly braces because the backend expects an object, without them amount would be received as undefined
+        const res = await firstValueFrom(this.http.post<MentorsResponse>(`${this.baseURL}/mentors/amount`, { amount }))
+        return res
+      } catch (err) {
+        console.log("Error while trying to get mentors by amount: ", err)
+        throw err
+      }
     }
 
     getAllMentors(): any[] {

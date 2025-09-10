@@ -5,19 +5,27 @@
             <a routerLink="/mentors">ყველა –></a>
         </div>
         <div class="mentorCards">
-            <div *ngFor="let mentor of mentors">
-                <div class="mentorCard" (click)="MentorsService.selectMentor(mentor)">
-                    <div class="mentorCard__Content">
-                        <div class="mentorCard__ProfileImg">
-                            <img [src]="mentor.image">
-                        </div>
-                        <div class="mentorCard__InfoHolder">
-                            <h1>{{mentor.name}}</h1>
-                            <p>{{mentor.position}}</p>
+            <!-- Use ngContainer instead of div because ngContainer doesn't create DOM elements and won't mess with the layout -->
+            <ng-container *ngIf="mentors.length > 0; else showLoadingMsg">
+                <div *ngFor="let mentor of mentors">
+                    <div class="mentorCard" (click)="MentorsService.selectMentor(mentor)">
+                        <div class="mentorCard__Content">
+                            <div class="mentorCard__ProfileImg">
+                                <img [src]="mentor.image">
+                            </div>
+                            <div class="mentorCard__InfoHolder">
+                                <h1>{{mentor.name}}</h1>
+                                <p>{{mentor.position}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </ng-container>
+
+            <ng-template #showLoadingMsg>
+                <p>იტვირთება...</p>
+            </ng-template>
+            
         </div>
     </div>
 </div>

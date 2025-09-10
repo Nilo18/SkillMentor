@@ -13,8 +13,9 @@ export class MentorCardsComponent {
 
   constructor(public MentorsService : MentorsServiceService) {}
 
-  ngOnInit() {
-    this.mentors = this.MentorsService.getMentorsByAmount(8) // მარტო 8 მენტორს წამოიღებს
+  async ngOnInit() {
+    const res = await this.MentorsService.getMentorsByAmount(8) 
+    this.mentors = res.mentorsData // მარტო 8 მენტორს წამოიღებს
   }
 
   @ViewChild('mentorCardsRef') mentorCards!: ElementRef
@@ -27,7 +28,6 @@ export class MentorCardsComponent {
       if (entry.isIntersecting && !this.animationHasRun) {
         this.visible = true;
         this.animationHasRun = true
-        console.log(this.visible);
         this.observer.unobserve(entry.target);
       }
     });

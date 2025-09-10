@@ -35,6 +35,7 @@
     column-gap: 26px;
     justify-content: stretch;
     margin-bottom: 50px;
+    // background-color: red;
 
     .mentorCard {
       cursor: pointer;
@@ -48,6 +49,7 @@
       border-radius: 8px;
       transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      // background-color: red;
 
       &:hover {
         transform: translateY(-10px);
