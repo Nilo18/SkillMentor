@@ -1,5 +1,12 @@
 import { Component, Inject, PLATFORM_ID, ViewChild, ElementRef } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
+
+interface Slide {
+  image: string,
+  text: string
+}
 
 @Component({
   selector: 'app-slider',
@@ -7,26 +14,11 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrl: './slider.component.scss'
 })
 export class SliderComponent {
-  slides: any[] = [
-    {
-      img: 'assets/slide1.png',
-      text: 'მოძებნე მენტორი რომლის ინტერესებშიც შენი განვითარება შედის.'
-    },
-    {
-      img: 'assets/slide2.png',
-      text: 'ექსპერტები პროგრამირებაში, დიზაინში, ბიზნესში და მრავალ თანამედროვე სპეციალობაში.'
-    },
-    {
-      img: 'assets/slide3.png',
-      text: 'სამი მარტივი ნაბიჯი: მოძებნე, დაჯავშნე, მიიღე სარგებლიანი რჩევა.'
-    },
-    {
-      img: 'assets/slide4.jpg',
-      text: 'განავითარე უნარები და მიიღე რჩევები, რომლებიც მართლა მუშაობს.'
-    },
-  ]
 
-  constructor(@Inject(PLATFORM_ID) private platformid: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformid: Object, private http: HttpClient) {}
+
+  slides: Slide[] = []
+
   private observer!: IntersectionObserver;
   @ViewChild('sliderRef') slider!: ElementRef
 
@@ -36,6 +28,7 @@ export class SliderComponent {
   btnWasClicked: boolean = false // This flag will be used to avoid spam clicking next or prev buttons
   i: number = 1;
   visible: boolean = false; // A flag to control when the component comes into view
+  baseURL: string = 'https://skillmentor-back-production.up.railway.app'
 
   next() {
     if (!this.btnWasClicked) {
@@ -72,10 +65,19 @@ export class SliderComponent {
     }, 3000)
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     // Make sure that the slider is run only in browser
     if (isPlatformBrowser(this.platformid)) {
       this.autoMoveSlide()
+    }
+
+    try {
+      const res = await firstValueFrom(this.http.get<Slide[]>(`${this.baseURL}/slider`))
+      console.log(res)
+      this.slides = res
+    } catch (err) {
+      console.log("Failed to fetch slides: ", err)
+      throw err
     }
   }
 
