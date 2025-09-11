@@ -4,12 +4,26 @@
         <div class="mentorProfile__DataAndContact">
             <div class="mentorProfile__LeftSection">
                 <div class="mentorProfile__ImgHolder">
-                    <!-- Add safe navigation operator to ensure that selectedMentor isn't accessed before it loads -->
-                    <img [src]="selectedMentor?.image" alt="Chosen mentor image">
+                    <ng-container *ngIf="!isLoading; else showLoading">
+                        <!-- Add safe navigation operator to ensure that selectedMentor isn't accessed before it loads -->
+                        <img [src]="selectedMentor?.image">
+                    </ng-container>
+
+                    <!-- The skeleton must be separate from the image, otherwise the image would cover the skeleton's styles -->
+                    <ng-template #showLoading>
+                        <div class="skeleton-img"></div>
+                    </ng-template>
                 </div>
                 <div class="mentorProfile__Info">
-                    <h1>{{selectedMentor?.name}}</h1>
-                    <p>{{selectedMentor?.position}}</p>
+                    <ng-container *ngIf="!isLoading; else showLoadingMsg">
+                        <h1>{{selectedMentor?.name}}</h1>
+                        <p>{{selectedMentor?.position}}</p>
+                    </ng-container>
+
+                    <ng-template #showLoadingMsg>
+                        <h1 class="skeleton-text"></h1>
+                        <p class="skeleton-text"></p>
+                    </ng-template>
                 </div>  
             </div>
             <div class="mentorProfile__ContactInfo">

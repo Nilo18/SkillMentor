@@ -16,25 +16,19 @@ export class MentorComponent {
   experienceWasDeleted : boolean = false
   currentUser : any;
   mentorsBaseLocal : any[] = []
-  // isLoading
+  isLoading: boolean = true
 
   constructor (private route: ActivatedRoute, private mentorsService: MentorsServiceService) {}
 
   async ngOnInit() {
     this.route.params.subscribe(async (params) => {
-      const id = params['id'];
-
-      this.selectedMentor = await this.mentorsService.getMentorById(id); // This method unites newly registered mentors and fake mentors to search by id
-
-      const stored = localStorage.getItem('currentUser')
-      this.currentUser = stored ? JSON.parse(stored) : null
-      if (this.currentUser !== null) {
-        this.shouldBeAbleToDelete = this.currentUser.id === this.selectedMentor.id 
+      try {
+        const id = params['id'];
+        this.selectedMentor = await this.mentorsService.getMentorById(id); // This method unites newly registered mentors and fake mentors to search by id
+        this.isLoading = false
+      } catch (err) {
+        console.log(err)
       }
-
-      console.log('The selected mentor is: ', this.selectedMentor)
-      console.log('His profile image is: ', this.selectedMentor.image)
-      console.log(JSON.parse(localStorage.getItem('currentUser') ?? 'null'));
     });
   }
 
