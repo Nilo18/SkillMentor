@@ -1,13 +1,19 @@
 <div class="cont">
     <div class="slider fade-in" [class.visible]="visible" #sliderRef>
         <div class="slides">
-            <img [src]="slides[currentIndex]?.image" [attr.data-key]="currentIndex" alt="Slider image">
-            <div class="bottom-shade">
-                <p routerLink="/mentors">{{slides[currentIndex]?.text}}</p>
-            </div>     
+            <ng-container *ngIf="!isLoading; else showLoading">
+                <img [src]="slides[currentIndex]?.image" [attr.data-key]="currentIndex" alt="Slider image">
+                <div class="bottom-shade">
+                    <p routerLink="/mentors">{{slides[currentIndex]?.text}}</p>
+                </div>     
+                <button class="prev" (click)="prev()">&#10094;</button>
+                <button class="next" (click)="next()">&#10095;</button>
+            </ng-container>
+
+            <ng-template #showLoading>
+                <div class="skeleton-img"></div>
+            </ng-template>
         </div>
-        <button class="prev" (click)="prev()">&#10094;</button>
-        <button class="next" (click)="next()">&#10095;</button>
     </div>
 </div>
 

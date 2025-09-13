@@ -29,6 +29,7 @@ export class SliderComponent {
   i: number = 1;
   visible: boolean = false; // A flag to control when the component comes into view
   baseURL: string = 'https://skillmentor-back-production.up.railway.app'
+  isLoading: boolean = true;
 
   next() {
     if (!this.btnWasClicked) {
@@ -67,17 +68,18 @@ export class SliderComponent {
 
   async ngOnInit() {
     // Make sure that the slider is run only in browser
-    if (isPlatformBrowser(this.platformid)) {
-      this.autoMoveSlide()
-    }
-
     try {
       const res = await firstValueFrom(this.http.get<Slide[]>(`${this.baseURL}/slider`))
+      this.isLoading = false;
       console.log(res)
       this.slides = res
     } catch (err) {
       console.log("Failed to fetch slides: ", err)
       throw err
+    }
+
+    if (!this.isLoading && isPlatformBrowser(this.platformid)) {
+      this.autoMoveSlide()
     }
   }
 
