@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { MentorDatabaseService } from '../../services/mentor-database.service';
 import { Router } from '@angular/router';
 import { MentorsServiceService } from '../../services/mentors-service.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -9,13 +10,15 @@ import { MentorsServiceService } from '../../services/mentors-service.service';
   styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
-  constructor(private MentorDatabase : MentorDatabaseService, private router: Router, public MentorsService : MentorsServiceService) {}
+  constructor(private MentorDatabase : MentorDatabaseService, 
+  private router: Router, public MentorsService : MentorsServiceService, private auth: AuthService) {}
 
   name = '';
   email = '';
   password = '';
   specialty = '';
-  profileImage: string | ArrayBuffer | null = null;
+  selectedImg: File | null = null // For backend 
+  profileImage: string | ArrayBuffer | null = null; // For preview on the page
   imageUploaded = false;
 
   nameError = '';
@@ -24,7 +27,7 @@ export class SignupComponent {
   specialtyError = '';
   imageError = '';
 
-  submitForm() {
+  async submitForm() {
     this.resetErrors();
     let valid = true;
 
@@ -54,29 +57,39 @@ export class SignupComponent {
     }
 
     if (valid) {
-      const newUser = {
-        id: Date.now(),
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        position: this.specialty,
-        image: this.profileImage,
-        charge: "50",
-        experiences: []
-      };
+      const formData = new FormData()
+      formData.append('name', this.name)
+      formData.append('email', this.email)
+      formData.append('password', this.password)
+      formData.append('position', this.specialty)
+      if (this.selectedImg) {
+        formData.append('image', this.selectedImg)
+      }
+      // const newUser = {
+      //   // id: Date.now(),
+      //   name: this.name,
+      //   email: this.email,
+      //   password: this.password,
+      //   position: this.specialty,
+      //   image: this.profileImage,
+      //   // charge: "50",
+      //   // experiences: []
+      // };
 
-      this.MentorDatabase.mentorsBase.push(newUser);
-      console.log(this.MentorDatabase.mentorsBase)
+      // this.auth
+      // this.MentorDatabase.mentorsBase.push(newUser);
+      // console.log(this.MentorDatabase.mentorsBase)
 
-      // Save updated mentor list
-      localStorage.setItem('mentorsBase', JSON.stringify(this.MentorDatabase.mentorsBase));
+      // // Save updated mentor list
+      // localStorage.setItem('mentorsBase', JSON.stringify(this.MentorDatabase.mentorsBase));
 
-      // Save current user separately
-      localStorage.setItem('currentUser', JSON.stringify(newUser));
+      // // Save current user separately
+      // localStorage.setItem('currentUser', JSON.stringify(newUser));
 
-      console.log(this.MentorDatabase.mentorsBase);
+      // console.log(this.MentorDatabase.mentorsBase);
+      await this.auth.signup(formData)
       this.router.navigate(['']);
-      alert('წარმატებით გაიარეთ რეგისტრაცია!');
+      alert('თქვენ წარმატებით გაიარეთ რეგისტრაცია!');
     }
   }
 
@@ -117,6 +130,7 @@ export class SignupComponent {
     } else if (file.size > maxSize) {
       this.fileError = 'ფაილი არ უნდა აღემატებოდეს 2MB-ს.';
     } else {
+      this.selectedImg = file
       this.selectedFileName = file.name;
       this.imageUploaded = true;
 
