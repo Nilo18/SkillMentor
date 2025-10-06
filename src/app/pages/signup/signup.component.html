@@ -1,33 +1,29 @@
 <div class="cont for-signUp">
-  <div class="signup">
+  <form [formGroup]="signup" class="signup" (ngSubmit)="submitForm()">
     <div class="signupContent">
       
       <div class="signupContent__Name">
         <label for="Name">სახელი</label>
-        <input type="text" [(ngModel)]="name" name="name">
-        <p *ngIf="nameError">{{ nameError }}</p>
-        <p *ngIf="!nameError">&nbsp;</p>
+        <input type="text" formControlName="name" name="name">
+        <p>{{name.invalid && name.touched ? nameError : ''}}</p>
       </div>
 
       <div class="signupContent__Email">
         <label for="Email">ელ–ფოსტა</label>
-        <input type="text" [(ngModel)]="email" name="email">
-        <p *ngIf="emailError">{{ emailError }}</p>
-        <p *ngIf="!emailError">&nbsp;</p>
+        <input type="text" formControlName="email" name="email">
+        <p>{{email.invalid && email.touched ? emailError : ''}}</p>
       </div>
 
       <div class="signupContent__Password">
         <label for="Password">პაროლი</label>
-        <input type="password" [(ngModel)]="password" name="password">
-        <p *ngIf="passwordError">{{ passwordError }}</p>
-        <p *ngIf="!passwordError">&nbsp;</p>
+        <input type="password" formControlName="password" name="password">
+        <p>{{password.invalid && password.touched ? passwordError : ''}}</p>
       </div>
 
       <div class="signupContent__Specialty">
         <label for="Specialty">პროფესია</label>
-        <input type="text" [(ngModel)]="specialty" name="specialty">
-        <p *ngIf="specialtyError">{{ specialtyError }}</p>
-        <p *ngIf="!specialtyError">&nbsp;</p>
+        <input type="text" formControlName="specialty" name="specialty">
+        <p>{{specialty.invalid && specialty.touched ? specialtyError : ''}}</p>
       </div>
 
         <div class="signupContent__ProfileImg">
@@ -41,12 +37,12 @@
                 {{ selectedFileName || 'ატვირთეთ პროფილის სურათი' }}
             </div>
 
-            <p [class.error]="fileError">{{ fileError }}</p>
+            <p>{{ fileError }}</p>
         </div>
 
 
-      <button type="submit" class="MentorBtn-Green signupBtn" (click)="submitForm()">გაწევრიანება</button>
+      <button type="submit" class="MentorBtn-Green signupBtn">გაწევრიანება</button>
 
     </div>
-  </div>
+  </form>
 </div>
