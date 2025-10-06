@@ -16,19 +16,12 @@ export class SignupComponent {
   private fb: FormBuilder) {}
 
   signup!: FormGroup;
-  // name = '';
-  // email = '';
-  // password = '';
-  // specialty = '';
   selectedImg: File | null = null // For backend 
   profileImage: string | ArrayBuffer | null = null; // For preview on the page
   imageUploaded = false;
 
-  // nameError = '';
-  // emailError = '';
-  // passwordError = '';
-  // specialtyError = '';
   imageError = '';
+  sameEmailError = ''
 
   ngOnInit() {
     this.signup = this.fb.group({
@@ -61,9 +54,10 @@ export class SignupComponent {
     return ''
   }
 
-  get emailError() {
+  emailError(sameEmailErr?: string) {
     if (this.email?.hasError('required')) return 'ელ–ფოსტა სავალდებულოა.'
     else if (this.email?.hasError('email')) return 'გთხოვთ შეიყვანეთ სწორი ელ–ფოსტა.'
+    else if (this.sameEmailError) return this.sameEmailError
     return ''
   }
 
@@ -95,7 +89,13 @@ export class SignupComponent {
         this.fileError = 'გთხოვთ ატვირთეთ მხოლოდ JPG ან PNG ტიპის სურათი.';
       }
 
-      await this.auth.signup(formData)
+      try {
+        await this.auth.signup(formData)
+      } catch (err: any) {
+        this.sameEmailError = err.error.message
+        return
+      }
+      
       this.router.navigate(['']);
       alert('თქვენ წარმატებით გაიარეთ რეგისტრაცია!');
   }

@@ -11,7 +11,7 @@
       <div class="signupContent__Email">
         <label for="Email">ელ–ფოსტა</label>
         <input type="text" formControlName="email" name="email">
-        <p>{{email.invalid && email.touched ? emailError : ''}}</p>
+        <p>{{ (email.invalid && email.touched) || sameEmailError ? emailError() : ''}}</p>
       </div>
 
       <div class="signupContent__Password">
