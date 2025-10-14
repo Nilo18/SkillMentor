@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { BackendUrlHolderService } from './backend-url-holder.service';
 
 interface Experience {
   company: string,
@@ -27,9 +28,11 @@ interface MentorsResponse {
   providedIn: 'root'
 })
 export class MentorsServiceService {
+  private baseURL: string
+  constructor(private router: Router, private http: HttpClient, private urlHolder: BackendUrlHolderService) { 
+    this.baseURL = this.urlHolder.getBaseURL();
+  }
 
-  constructor(private router: Router, private http: HttpClient) { }
-  private baseURL = 'https://skillmentor-back-production.up.railway.app'
   private mentors: Mentor[]= []
 
     // Specify the return type so that typescript knows that we're returning an array
@@ -39,7 +42,7 @@ export class MentorsServiceService {
         // Wrap amount in curly braces because the backend expects an object, without them amount would be received as undefined
         const res = await firstValueFrom(this.http.post<MentorsResponse>(`${this.baseURL}/mentors/amount`, { amount }))
         return res
-      } catch (err) {
+      } catch (err) { 
         console.log("Error while trying to get mentors by amount: ", err)
         throw err
       }

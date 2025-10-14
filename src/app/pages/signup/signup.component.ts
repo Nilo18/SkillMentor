@@ -73,11 +73,14 @@ export class SignupComponent {
   }
 
   async submitForm() {
+    console.log("I'm running")
       if (this.signup.invalid) {
+        console.log('Form is invalid')
         this.signup.markAllAsTouched();
         return
       }
 
+      console.log('The suggested data is: ', this.signup.value)
       const formData = new FormData()
       formData.append('name', this.signup.value.name)
       formData.append('email', this.signup.value.email)
@@ -85,19 +88,21 @@ export class SignupComponent {
       formData.append('position', this.signup.value.specialty)
       if (this.selectedImg) {
         formData.append('image', this.selectedImg)
+        console.log('The suggested image is: ', this.selectedImg)
       } else {
         this.fileError = 'გთხოვთ ატვირთეთ მხოლოდ JPG ან PNG ტიპის სურათი.';
       }
 
       try {
+        console.log('Initiating sign up...')
         await this.auth.signup(formData)
       } catch (err: any) {
         this.sameEmailError = err.error.message
         return
       }
       
-      this.router.navigate(['']);
-      alert('თქვენ წარმატებით გაიარეთ რეგისტრაცია!');
+      // this.router.navigate(['']);
+      alert('თქვენ წარმატებით გაიარეთ რეგისტრაციის პირველი ეტაპი, გთხოვთ შეამოწმოთ ელ–ფოსტა.');
   }
 
   @ViewChild('fileInput') fileInputRef!: ElementRef;

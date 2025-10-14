@@ -2,6 +2,7 @@ import { Component, Inject, PLATFORM_ID, ViewChild, ElementRef } from '@angular/
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
+import { BackendUrlHolderService } from '../../services/backend-url-holder.service';
 
 interface Slide {
   image: string,
@@ -15,7 +16,7 @@ interface Slide {
 })
 export class SliderComponent {
 
-  constructor(@Inject(PLATFORM_ID) private platformid: Object, private http: HttpClient) {}
+  constructor(@Inject(PLATFORM_ID) private platformid: Object, private http: HttpClient, private urlHolder: BackendUrlHolderService) {}
 
   slides: Slide[] = []
 
@@ -28,7 +29,7 @@ export class SliderComponent {
   btnWasClicked: boolean = false // This flag will be used to avoid spam clicking next or prev buttons
   i: number = 1;
   visible: boolean = false; // A flag to control when the component comes into view
-  baseURL: string = 'https://skillmentor-back-production.up.railway.app'
+  baseURL!: string;
   isLoading: boolean = true;
 
   next() {
@@ -68,6 +69,7 @@ export class SliderComponent {
 
   async ngOnInit() {
     // Make sure that the slider is run only in browser
+    this.baseURL = this.urlHolder.getBaseURL();
     try {
       const res = await firstValueFrom(this.http.get<Slide[]>(`${this.baseURL}/slider`))
       this.isLoading = false;

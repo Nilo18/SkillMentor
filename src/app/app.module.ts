@@ -22,6 +22,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { CountUpModule } from 'ngx-countup';
 import { SliderComponent } from './components/slider/slider.component';
 import { HttpClientModule } from '@angular/common/http';
+import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReviewsComponent,
     StatisticsComponent,
     SliderComponent,
+    VerifyEmailComponent,
   ],
   imports: [
     BrowserModule,

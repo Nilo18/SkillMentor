@@ -6,6 +6,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { MentorsComponent } from './pages/mentors/mentors.component';
 import { MentorComponent } from './pages/mentor/mentor.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'mentors', component: MentorsComponent },
   { path: 'mentor/:id', component: MentorComponent },
-  { path: 'settings', component: SettingsComponent }
+  { path: 'settings', component: SettingsComponent },
+  { path: 'verify-email/:token', component: VerifyEmailComponent },
 ];
 
 
