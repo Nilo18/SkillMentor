@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MentorDatabaseService } from '../../services/mentor-database.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -8,43 +10,73 @@ import { MentorDatabaseService } from '../../services/mentor-database.service';
   styleUrl: './signin.component.scss'
 })
 export class SigninComponent {
-  email: string = '';
-  password: string = '';
-  emailError: string = '';
-  passwordError: string = '';
+  errMsg: string = ''
+  gotSigninError: boolean = false;
+  signin!: FormGroup
+  shouldAppearDisabled: boolean = false // Flag to control sign in button styling while the login request is being sent
 
   constructor(
     private MentorDatabase: MentorDatabaseService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder ,
+    private auth: AuthService
   ) {}
 
-  login() {
-    this.emailError = '';
-    this.passwordError = '';
+  ngOnInit() {
+    this.signin = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(3)]]
+    })  
 
-    if (!this.email.trim()) {
-      this.emailError = 'გთხოვთ მიუთითოთ ელ–ფოსტა';
-      return;
+    // Disable backend errors on input field changes
+    this.signin.valueChanges.subscribe(() => {
+      this.gotSigninError = false;
+      this.errMsg = ''
+    })
+  }
+
+  get email() {
+    return this.signin.get('email')!
+  }
+
+  get password() {
+    return this.signin.get('password')!
+  }
+
+  get emailError() {
+    if (this.email?.hasError('required')) return 'ელ–ფოსტა სავალდებულოა'
+    if (this.email?.hasError('email')) return 'გთხოვთ შეიყვანოთ სწორი ელ–ფოსტა.'
+    return ''
+  }
+
+  get passwordError() {
+    if (this.password?.hasError('required')) return 'პაროლი სავალდებულოა.'
+    if (this.password?.hasError('minlength')) return 'პაროლი უნდა შეიცავდეს მინიმუმ 3 სიმბოლოს.'
+    return ''
+  }
+
+  async login() {
+    this.gotSigninError = false;
+    this.errMsg = ''
+
+    if (this.signin.invalid) {
+      this.signin.markAllAsTouched()
+      console.log('Form is invalid')
+      return
     }
 
-    if (!this.password.trim()) {
-      this.passwordError = 'გთხოვთ შეიყვანოთ პაროლი';
-      return;
-    }
-
-    const storedData = localStorage.getItem('mentorsBase');
-    const mentors = storedData ? JSON.parse(storedData) : [];
-
-    const foundUser = mentors.find((mentor: any) =>
-      mentor.email === this.email && mentor.password === this.password
-    );
-
-    if (foundUser) {
-      localStorage.setItem('currentUser', JSON.stringify(foundUser));
-      alert('შესვლა წარმატებით შესრულდა!');
-      this.router.navigate(['']);
-    } else {
-      this.passwordError = 'ელ–ფოსტა ან პაროლი არასწორია';
+    try {
+      console.log(this.signin.value)
+      this.shouldAppearDisabled = true;
+      const accessToken = await this.auth.login(this.signin.value.email, this.signin.value.password)
+      console.log("Access token in login component: ", accessToken);
+      localStorage.setItem('seefAccessToken', JSON.stringify(accessToken))
+      this.router.navigate(['/'])
+    } catch(err: any) {
+      console.log("Couldn't sign in: ", err);
+      this.gotSigninError = true;
+      this.shouldAppearDisabled = false
+      this.errMsg = err.error.message
     }
   }
 }

@@ -45,9 +45,20 @@ export class AuthService {
     }
   }
   
-  login(user: any) {
-    this.currentUserSubject.next(user);
-    localStorage.setItem('currentUser', JSON.stringify(user));
+  async login(userEmail: string, userPassword: string) {
+    try {
+      const body = {
+        email: userEmail,
+        password: userPassword
+      }
+      const res = await firstValueFrom(this.http.post<{accessToken: string}>(`${this.baseURL}/signin`, body))
+      console.log(res)
+      console.log(res.accessToken)
+      return res
+    } catch (err) {
+      console.log('Failed to log in: ', err);
+      throw err;
+    }
   }
 
   logout() {

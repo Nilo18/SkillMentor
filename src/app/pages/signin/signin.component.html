@@ -1,18 +1,24 @@
 <div class="cont for-signIn">
   <div class="signin">
-    <div class="signinContent">
+    <form class="signinContent" [formGroup]="signin" (ngSubmit)="login()">
       <div class="signinContent__Email">
         <label for="Email">ელ–ფოსტა</label>
-        <input type="text" [(ngModel)]="email">
-        <p class="error" *ngIf="emailError">{{ emailError }}</p>
+        <input type="text" formControlName="email">
+        <p>{{ email.invalid && email.touched ? emailError : '' }}</p>
       </div>
       <div class="signinContent__Password">
         <label for="Password">პაროლი</label>
-        <input type="password" [(ngModel)]="password">
-        <p class="error" *ngIf="passwordError">{{ passwordError }}</p>
+        <input type="password" formControlName="password">
+        <p>{{ password.invalid && password.touched ? passwordError : '' }}</p>
+        <!-- <ng-container *ngIf="gotSigninError"> -->
+          <p>{{ gotSigninError ? errMsg : '' }}</p>
+        <!-- </ng-container> -->
       </div>
       <a class="forgotPasswordBtn">დაგავიწყდა პაროლი?</a>
-      <button type="submit" class="MentorBtn-Green signinBtn" (click)="login()">შესვლა</button>
-    </div>
+      <button type="submit" class="MentorBtn-Green signinBtn" [class.appearDisabled]="shouldAppearDisabled" 
+      [disabled]="shouldAppearDisabled">
+        შესვლა
+      </button>
+    </form>
   </div>
 </div>
