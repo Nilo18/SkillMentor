@@ -10,7 +10,7 @@ interface Experience {
   description: string,
 }
 
-interface Mentor {
+export interface Mentor {
   _id: string;
   id: string;
   name: string;

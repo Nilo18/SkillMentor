@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { SpamValidatorService } from '../../services/spam-validator.service';
+import { Mentor, MentorsServiceService } from '../../services/mentors-service.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -10,7 +12,7 @@ import { SpamValidatorService } from '../../services/spam-validator.service';
 export class SettingsComponent {
   experiences : any[] = []
   mentorBaseLocal : any[] = []
-  currentUser : any
+  currentUser: any
   currentUserInDatabase : any
 
   noSpamValidator() : ValidatorFn {
@@ -24,7 +26,8 @@ export class SettingsComponent {
   experience: FormGroup; // This will be assigned when the form is built
 
   // This builds the form and assigns it to a FormGroup
-  constructor(private fb: FormBuilder, private SpamValidator: SpamValidatorService) {
+  constructor(private fb: FormBuilder, private SpamValidator: SpamValidatorService,
+    private mentors: MentorsServiceService, private route: ActivatedRoute) {
     this.experience = fb.group({
       company: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
       position: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -34,30 +37,37 @@ export class SettingsComponent {
 
   textIsSpammy: boolean = false;
 
-  ngOnInit() {
-    const storedUser = localStorage.getItem('currentUser');
-    const storedMentors = localStorage.getItem('mentorsBase');
+  async ngOnInit() {
+    // const storedUser = localStorage.getItem('currentUser');
+    // const storedMentors = localStorage.getItem('mentorsBase');
 
-    if (storedUser && storedMentors) {
-      const mentors = JSON.parse(storedMentors);
-      const user = JSON.parse(storedUser);
+    // if (storedUser && storedMentors) {
+    //   const mentors = JSON.parse(storedMentors);
+    //   const user = JSON.parse(storedUser);
 
-      // Find the fresh user data inside mentorsBase
-      const freshUser = mentors.find((m : any) => m.id === user.id);
+    //   // Find the fresh user data inside mentorsBase
+    //   const freshUser = mentors.find((m : any) => m.id === user.id);
 
-      if (freshUser) {
-        this.currentUser = freshUser;
-        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-      } else {
-        this.currentUser = user;
-      }
+    //   if (freshUser) {
+    //     this.currentUser = freshUser;
+    //     localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    //   } else {
+    //     this.currentUser = user;
+    //   }
 
-      // Ensure experiences array exists
-      if (!this.currentUser.hasOwnProperty('experiences')) {
-        this.currentUser.experiences = [];
-        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-      }
+    //   // Ensure experiences array exists
+    //   if (!this.currentUser.hasOwnProperty('experiences')) {
+    //     this.currentUser.experiences = [];
+    //     localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    //   }
+    // }
+    const id = this.route.snapshot.paramMap.get('id')
+    if (id) {
+      const res = await this.mentors.getMentorById(id)
+      console.log(res)
+      this.currentUser = res
     }
+  
   }
 
   addExperience() {

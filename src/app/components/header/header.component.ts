@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { MentorsServiceService } from '../../services/mentors-service.service';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +11,9 @@ import { jwtDecode } from 'jwt-decode';
 export class HeaderComponent {
   userImage: any;
   accessToken: any;
+  userId: any
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private mentors: MentorsServiceService) {}
 
   ngOnInit() {
     // Make sure the localStorage and the input are not in conflict
@@ -21,6 +23,8 @@ export class HeaderComponent {
       const decoded = jwtDecode<any>(this.accessToken)
       console.log('Decoded access token: ', decoded)
       this.userImage = decoded.image
+      this.userId = decoded.id
+      console.log('The id is: ', this.userId)
       console.log(this.userImage)
     } else {
       console.log('Token was not found in localStorage')
@@ -39,6 +43,6 @@ export class HeaderComponent {
   }
 
   navigateToTheSettingsPage() {
-    this.router.navigate(['/settings'])
+    this.router.navigate(['/settings', this.userId])
   }
 }

@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'mentors', component: MentorsComponent },
   { path: 'mentor/:id', component: MentorComponent },
-  { path: 'settings', component: SettingsComponent },
+  { path: 'settings/:id', component: SettingsComponent },
   { path: 'verify-email/:token', component: VerifyEmailComponent },
 ];
 

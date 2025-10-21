@@ -5,19 +5,19 @@
             <img [src]="currentUser.image" alt="Profile Image" class="profile-img"/>
             <div class="userInfo__Name">
                 <h1>სახელი:</h1>
-                <p>{{ currentUser.name }}</p>
+                <h1>{{ currentUser.name }}</h1>
             </div>
             <div class="userInfo__Email">
                 <h1>ელ–ფოსტა:</h1>
-                <p>{{ currentUser.email }}</p>
+                <h1>{{ currentUser.email }}</h1>
             </div>
             <div class="userInfo__Password">
                 <h1>პაროლი:</h1>
-                <p>{{ '•'.repeat(currentUser.password.length) }}</p>
+                <h1>{{ '•'.repeat(16) }}</h1>
             </div>
             <div class="userInfo__Specialty">
                 <h1>პროფესია:</h1>
-                <p>{{ currentUser.position }}</p>
+                <h1>{{ currentUser.position }}</h1>
             </div>
             
         </div>
