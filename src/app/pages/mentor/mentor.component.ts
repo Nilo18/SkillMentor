@@ -24,7 +24,8 @@ export class MentorComponent {
     this.route.params.subscribe(async (params) => {
       try {
         const id = params['id'];
-        this.selectedMentor = await this.mentorsService.getMentorById(id); // This method unites newly registered mentors and fake mentors to search by id
+        this.selectedMentor = await this.mentorsService.getMentorById(id); 
+        console.log(this.selectedMentor)
         this.isLoading = false
       } catch (err) {
         console.log(err)

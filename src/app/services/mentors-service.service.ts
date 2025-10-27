@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
+import { first, firstValueFrom } from 'rxjs';
 import { BackendUrlHolderService } from './backend-url-holder.service';
 
-interface Experience {
+export interface Experience {
   company: string,
   position: string,
   description: string,
@@ -70,6 +70,32 @@ export class MentorsServiceService {
         throw err
       }
       // return this.getAllMentors().mentorsData.find(m => m.id == id);
+    }
+
+    async addMentorExperience(id: string, experience: Experience) {
+      try {
+        const stored = localStorage.getItem('seefAccessToken')
+        const token = stored ? JSON.parse(stored) : null
+        if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          })
+
+          const body = {
+            id: id,
+            experience: experience
+          }
+          
+          const res = await firstValueFrom(this.http.patch(`${this.baseURL}/mentors/experiences`, body, {headers}))
+          console.log(res)
+        } else {
+          console.log("Didn't add the experience beceause the token was missing.")
+          return;
+        }
+      } catch (err) {
+        console.log("Failed to add the experience: ", err)
+        throw err
+      }
     }
 
     selectMentor(mentor: any) {
