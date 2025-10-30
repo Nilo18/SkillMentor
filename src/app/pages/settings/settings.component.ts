@@ -56,31 +56,5 @@ export class SettingsComponent {
     const experienceValue = this.experience.value
     console.log('Experience added:', experienceValue);
     await this.mentors.addMentorExperience(this.currentUser._id, experienceValue)
-
-  
-    // if (!this.SpamValidator.isSpammyText(experienceValue)) {
-    //   this.currentUser.experiences.push({ ...experienceValue })
-    //   localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-    //   this.textIsSpammy = false
-    // } else {
-    //   this.textIsSpammy = true;
-    // }
-
-    // // Retrieve the mentor base
-    // const stored = localStorage.getItem('mentorsBase');
-    // this.mentorBaseLocal = stored? JSON.parse(stored) : []
-
-    // // Find the current user in the mentor base by index
-    // const index = this.mentorBaseLocal.findIndex(m => m.id === this.currentUser.id)
-
-    // // If the current user was found update it's experiences base on the data current user has provided with
-    // if (index !== -1) {
-    //   this.mentorBaseLocal[index] = { ...this.currentUser };
-    //   localStorage.setItem('mentorsBase', JSON.stringify(this.mentorBaseLocal))
-    // }
-
-    // // this.experiences.push({ ...this.experience });
-    // console.log(this.currentUser.experiences)
-    // this.experience.reset()
   }
 }

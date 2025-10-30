@@ -33,14 +33,14 @@
         </div>
 
         <div class="mentorProfile__Experiences">
-            <div *ngFor="let experience of selectedMentor?.experiences; let index = index">
+            <div *ngFor="let experience of experiencesLocal; let index = index">
                 <div class="mentorProfile__experience">
                     <div class="mentorProfile__experience__contentHolder">
                         <h2>{{experience.company}}</h2>
                         <h4>{{experience.position}}</h4>
                         <p>{{experience.description}}</p>
                         <span>სექტემბერი 2021 – დეკემბერი 2023</span>
-                        <!-- <h3 *ngIf="shouldBeAbleToDelete" class="removeBtn" (click)="removeExperience(index)">X</h3> -->
+                        <h3 *ngIf="shouldBeAbleToDelete" class="removeBtn" (click)="removeExperience(experience._id)">X</h3>
                     </div>
 
                 </div>

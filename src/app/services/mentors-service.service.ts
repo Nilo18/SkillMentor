@@ -5,6 +5,7 @@ import { first, firstValueFrom } from 'rxjs';
 import { BackendUrlHolderService } from './backend-url-holder.service';
 
 export interface Experience {
+  _id?: string
   company: string,
   position: string,
   description: string,
@@ -74,12 +75,9 @@ export class MentorsServiceService {
 
     async addMentorExperience(id: string, experience: Experience) {
       try {
-        const stored = localStorage.getItem('seefAccessToken')
-        const token = stored ? JSON.parse(stored) : null
+        const token = this.retrieveToken()
         if (token) {
-          const headers = new HttpHeaders({
-            'Authorization': `Bearer ${token}`
-          })
+          const headers = this.formatTokenAsHeader(token)
 
           const body = {
             id: id,
@@ -96,6 +94,34 @@ export class MentorsServiceService {
         console.log("Failed to add the experience: ", err)
         throw err
       }
+    }
+
+    async removeMentorExperience(mentorId: string, experienceId: string) {
+      try {
+        const token = this.retrieveToken()
+        const headers = this.formatTokenAsHeader(token)
+        const res = await firstValueFrom(this.http.delete(
+          `${this.baseURL}/mentors/${mentorId}/experiences/${experienceId}`, {headers})
+        )
+        console.log(res)
+      } catch (err) {
+        console.log("Failed to remove the experience:" + err)
+        throw err
+      }
+    }
+
+    // Utility method for retrieving token from localStorage
+    retrieveToken() {
+      const stored = localStorage.getItem('seefAccessToken')
+      const token = stored ? JSON.parse(stored) : null
+      return token;
+    }
+
+    // Utility method for formatting JWT as a header
+    formatTokenAsHeader(token: any) {
+      return new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
     }
 
     selectMentor(mentor: any) {
