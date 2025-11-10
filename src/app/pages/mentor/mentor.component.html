@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="cont">
-    <div class="mentorProfile">
+    <div class="mentorProfile" [class.scrollLock]="showPinModal">
         <div class="mentorProfile__DataAndContact">
             <div class="mentorProfile__LeftSection">
                 <div class="mentorProfile__ImgHolder">
@@ -32,8 +32,52 @@
             </div>
         </div>
 
+        <!-- Pin customization visibility is depended on shouldBeAbleToDelete because
+        the flag already controls profile customization visibility and it would be redundant to create a separate flag for pins  
+        -->
+        <ng-container *ngIf="shouldBeAbleToDelete">
+            <div class="mentorProfile__Pins">
+                <h3>ტოპ გამოცდილებები</h3>
+                <p (click)="toggleModal(true)">არჩევა</p>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="showPinModal">
+            <div class="mentorProfile__pinModalBackground"></div>
+            <div class="mentorProfile__pinModal">
+                <div class="mentorProfile__pinModal__content">
+                    <div class="mentorProfile__pinModal__content__header">
+                        <h4>ტოპ გამოცდილებების ცვლილება</h4>
+                        <i class="fa-solid fa-x" (click)="toggleModal(false)"></i>
+                    </div>
+                    <p>აირჩიეთ 3 ტოპ გამოცდილება პროფილის გვერდზე გამოსატანად</p>
+                    <div class="mentorProfile__pinModal__content__pins">
+                        <div *ngFor="let experience of experiencesLocal; let index = index">
+                            <div class="mentorProfile__pinModal__content__pins__pin">
+                                <div class="mentorProfile__pinModal__content__pins__pin__main">
+                                    <div class="mentorProfile__pinModal__content__pins__pin__leftSide">
+                                        <input type="checkbox">
+                                        <p>{{experience.company}}</p>
+                                    </div>
+                                    <i class="fa-solid fa-caret-down" (click)="togglePinFullVisibility(index)"></i>
+                                </div>
+
+                                <ng-content *ngIf="showFullPinInfo[index]">
+                                    <div class="mentorProfile__pinModal__content__pins__pin__extra">
+                                        <h4>{{experience.position}}</h4>
+                                        <p>{{experience.description}}</p>
+                                        <button (click)="removeExperience(experience._id)">წაშლა</button>
+                                    </div>
+                                </ng-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
         <div class="mentorProfile__Experiences">
-            <div *ngFor="let experience of experiencesLocal; let index = index">
+            <div *ngFor="let experience of topExperiences; let index = index">
                 <div class="mentorProfile__experience">
                     <div class="mentorProfile__experience__contentHolder">
                         <h2>{{experience.company}}</h2>
@@ -42,7 +86,6 @@
                         <span>სექტემბერი 2021 – დეკემბერი 2023</span>
                         <h3 *ngIf="shouldBeAbleToDelete" class="removeBtn" (click)="removeExperience(experience._id)">X</h3>
                     </div>
-
                 </div>
             </div>
         </div>

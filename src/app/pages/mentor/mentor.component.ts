@@ -19,7 +19,10 @@ export class MentorComponent {
   mentorsBaseLocal : any[] = []
   isLoading: boolean = true
   decodedToken!: any
-  experiencesLocal: Experience[] = []
+  experiencesLocal: Experience[] = [] // This array is to display all the experiences
+  topExperiences: Experience[] = [] // This array is used to display top 3 pinned experiences on the main page
+  showPinModal: boolean = false;
+  showFullPinInfo: boolean[] = []; // A flag to control pin full visibility
 
   constructor (private route: ActivatedRoute, private mentorsService: MentorsServiceService) {}
 
@@ -38,6 +41,10 @@ export class MentorComponent {
         // which would overload the local array, but a single mentor will have to pin only 3 of their top experiences
         // on the page (Similar to how GitHub pins only 6 repos on the profile page)
         this.experiencesLocal = this.selectedMentor.experiences
+        // Move first 3 experiences into the top experiences
+        this.topExperiences = this.experiencesLocal.slice(0, 3)
+         // Initialize the pin flags as false
+        this.showFullPinInfo = this.experiencesLocal.map(() => false)
         // Toggle X Icon on the experiences, if the logged in user is viewing their own page, they should be able to see it
         // So they can delete it if they would like to
         if (this.decodedToken && this.selectedMentor.id === this.decodedToken.id) {
@@ -58,6 +65,17 @@ export class MentorComponent {
     // Remove the experience both from the local array and the database
     const indexToRemove = this.experiencesLocal.findIndex(experience => experience._id === experienceId)
     this.experiencesLocal.splice(indexToRemove, 1)
+    const indexInTop = this.topExperiences.findIndex(experience => experience._id === experienceId)
+    this.topExperiences.splice(indexInTop, 1)
     await this.mentorsService.removeMentorExperience(mentorId, experienceId)
+  }
+
+  toggleModal(val: boolean) {
+    this.showPinModal = val;
+    // this.showFullPinInfo = false;
+  }
+
+  togglePinFullVisibility(index: number) {
+    this.showFullPinInfo[index] = !this.showFullPinInfo[index]
   }
 }

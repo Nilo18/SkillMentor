@@ -84,6 +84,135 @@
         }
     }
 
+    .mentorProfile__Pins {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        :nth-child(2) {
+            color: #0969da;
+            cursor: pointer;
+        }
+
+        :nth-child(2):hover {
+            text-decoration: underline;
+        }
+    }
+
+    .mentorProfile__pinModalBackground {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.312);
+        opacity: 0.8;
+        z-index: 999; /* below the modal */
+    }
+
+    .mentorProfile__pinModal {
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        position: fixed;
+        z-index: 1000;
+        top: 50%;
+        // bottom: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        // right: 50%;
+        background-color: white;
+        width: 500px;
+        height: 500px;
+        overflow-y: auto;
+        padding: 30px;
+
+        .mentorProfile__pinModal__content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .mentorProfile__pinModal__content__header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                i {
+                    cursor: pointer;
+                }
+            }
+
+            // Target only direct children
+            >:nth-child(2) {
+                padding-bottom: 20px;
+                border-bottom: 1px solid gray;
+                font-size: 14px;
+            }
+
+            .mentorProfile__pinModal__content__pins {
+                // border: 1px solid;
+                width: 100%;
+                height: auto;
+                // overflow-y: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                .mentorProfile__pinModal__content__pins__pin {
+                    border: 1px solid;
+                    border-radius: 8px;
+                    padding: 10px;
+                    min-height: 30px;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    .mentorProfile__pinModal__content__pins__pin__main {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .mentorProfile__pinModal__content__pins__pin__leftSide {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            gap: 10px;
+                        }
+
+                        i {
+                            cursor: pointer;
+                        }
+                    }
+
+                }
+
+                .mentorProfile__pinModal__content__pins__pin__extra {
+                    margin-top: 15px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    button {
+                        background-color: red;
+                        font-weight: bold;
+                        border: none;
+                        border-radius: 8px;
+                        color: white;
+                        padding: 10px;
+                        cursor: pointer;
+                    }
+
+                    button:hover {
+                        background-color: rgb(200, 1, 1);
+                        transition: 0.15s ease-in-out;
+                    }
+                }
+            }
+
+        }
+
+    }
+
     .mentorProfile__Experiences {
         // display: flex;
         display: grid;
@@ -161,8 +290,10 @@
 
         }
     }
+}
 
-
+.scrollLock {
+    overflow: hidden;
 }
 
 @media (min-width: 900px) and (max-width: 1199.98px) {
