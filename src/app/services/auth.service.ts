@@ -5,11 +5,11 @@ import { BehaviorSubject } from 'rxjs';
 import { firstValueFrom } from 'rxjs';
 import { BackendUrlHolderService } from './backend-url-holder.service';
 
-interface Experience {
-  company: string,
-  position: string,
-  description: string,
-}
+// interface Experience {
+//   company: string,
+//   position: string,
+//   description: string,
+// }
 
 
 @Injectable({ providedIn: 'root' })

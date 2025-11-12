@@ -5,7 +5,8 @@ import { first, firstValueFrom } from 'rxjs';
 import { BackendUrlHolderService } from './backend-url-holder.service';
 
 export interface Experience {
-  _id?: string
+  _id?: any
+  isOnTop: boolean,
   company: string,
   position: string,
   description: string,

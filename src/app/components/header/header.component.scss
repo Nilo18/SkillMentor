@@ -17,6 +17,13 @@
     overflow: hidden;
     min-width: 0;
 
+    img {
+        width: 200px;
+        height: 100px;
+        object-fit: cover;
+        cursor: pointer;
+    }
+
     h1 {
         user-select: none;
         cursor: pointer;

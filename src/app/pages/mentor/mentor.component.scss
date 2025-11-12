@@ -142,10 +142,13 @@
             }
 
             // Target only direct children
-            >:nth-child(2) {
+            >:nth-child(2), >:nth-child(3) {
+                font-size: 14px;
+            }
+
+            >:nth-child(3) {
                 padding-bottom: 20px;
                 border-bottom: 1px solid gray;
-                font-size: 14px;
             }
 
             .mentorProfile__pinModal__content__pins {
@@ -207,6 +210,22 @@
                         transition: 0.15s ease-in-out;
                     }
                 }
+            }
+
+            .mentorProfile__pinModal__contentSavebtn {
+                // margin-top: 70px;
+                background-color: green;
+                color: white;
+                font-weight: bold;
+                border: none;
+                padding: 10px;
+                cursor: pointer;
+                border-radius: 8px;
+            }
+
+            .mentorProfile__pinModal__contentSavebtn:hover {
+                background-color: rgb(0, 111, 0);
+                transition: 0.15s ease-in-out;
             }
 
         }

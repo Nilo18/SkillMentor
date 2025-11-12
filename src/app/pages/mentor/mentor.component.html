@@ -51,27 +51,39 @@
                         <i class="fa-solid fa-x" (click)="toggleModal(false)"></i>
                     </div>
                     <p>აირჩიეთ 3 ტოპ გამოცდილება პროფილის გვერდზე გამოსატანად</p>
+                    <p>დარჩენილია {{availableTopSlots}}</p>
                     <div class="mentorProfile__pinModal__content__pins">
                         <div *ngFor="let experience of experiencesLocal; let index = index">
-                            <div class="mentorProfile__pinModal__content__pins__pin">
+                            <div class="mentorProfile__pinModal__content__pins__pin" [ngStyle]="{
+                                'background-color': checkForFreeTopSlots(experience) ? '#fcfafa' : 'white'  
+                            }">
                                 <div class="mentorProfile__pinModal__content__pins__pin__main">
                                     <div class="mentorProfile__pinModal__content__pins__pin__leftSide">
-                                        <input type="checkbox">
-                                        <p>{{experience.company}}</p>
+                                        <input type="checkbox" [disabled]="checkForFreeTopSlots(experience)" 
+                                        [checked]="experience.isOnTop"
+                                        (click)="toggleTop(experience._id)">
+                                        <p [ngStyle]="{'color': checkForFreeTopSlots(experience) ? 'gray' : 'black'}">
+                                            {{experience.company}}
+                                        </p>
                                     </div>
                                     <i class="fa-solid fa-caret-down" (click)="togglePinFullVisibility(index)"></i>
                                 </div>
 
                                 <ng-content *ngIf="showFullPinInfo[index]">
                                     <div class="mentorProfile__pinModal__content__pins__pin__extra">
-                                        <h4>{{experience.position}}</h4>
-                                        <p>{{experience.description}}</p>
+                                        <h4 [ngStyle]="{'color': checkForFreeTopSlots(experience) ? 'gray' : 'black'}">
+                                            {{experience.position}}
+                                        </h4>
+                                        <p [ngStyle]="{'color': checkForFreeTopSlots(experience) ? 'gray' : 'black'}">
+                                            {{experience.description}}
+                                        </p>
                                         <button (click)="removeExperience(experience._id)">წაშლა</button>
                                     </div>
                                 </ng-content>
                             </div>
                         </div>
                     </div>
+                    <button class="mentorProfile__pinModal__contentSavebtn" (click)="saveChanges()">შეცვლა</button>
                 </div>
             </div>
         </ng-container>
@@ -84,7 +96,7 @@
                         <h4>{{experience.position}}</h4>
                         <p>{{experience.description}}</p>
                         <span>სექტემბერი 2021 – დეკემბერი 2023</span>
-                        <h3 *ngIf="shouldBeAbleToDelete" class="removeBtn" (click)="removeExperience(experience._id)">X</h3>
+                        <!-- <h3 *ngIf="shouldBeAbleToDelete" class="removeBtn" (click)="removeExperience(experience._id)">X</h3> -->
                     </div>
                 </div>
             </div>

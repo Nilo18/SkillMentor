@@ -37,6 +37,11 @@ export class MentorCardsComponent {
     this.observer.observe(this.mentorCards.nativeElement) // Observe for the mentorCards native element
   }
 
+  // navigateAndRefresh(mentor: any) {
+  //   this.MentorsService.selectMentor(mentor)
+  //   window.location.reload()
+  // }
+
   ngOnDestroy() {
     // Check if observer is valid i.e not undefined
     if (this.observer) {
