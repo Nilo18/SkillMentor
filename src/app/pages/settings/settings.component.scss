@@ -8,7 +8,7 @@
 
             .userInfo {
                 padding: 40px;
-                min-height: 600px; // or remove it entirely
+                min-height: 500px; 
                 height: auto;
                 width: 1200px;
                 background-color: white;
@@ -21,20 +21,65 @@
                 img {
                     object-fit: cover;
                     border-radius: 50%;
-                    justify-self: center;
+                    justify-self: left;
                     align-self: center;
                     width: 150px;
                     height: 150px;
                     cursor: pointer;
                 }
 
+                .userInfo__Name {
+                    .userInfo__Name__edit {
+                        display: flex;
+
+                        input {
+                            width: 300px;
+                        }
+                    }
+                }
+
+                .userInfo__Email {
+                    .userInfo__Email__edit {    
+                        display: flex;
+
+                        input {
+                            width: 300px;
+                        }
+                    }
+                }
+
+                .userInfo__Password {
+                    .userInfo__Password__edit {
+                            display: flex;
+
+                            input {
+                                width: 300px;
+                            }
+                    }
+                }
+
+                .userInfo__Specialty {
+                    .userInfo__Specialty__edit {    
+                        display: flex;
+
+                        input {
+                            width: 300px;
+                        }
+                    }
+                }
+
                 .userInfo__Name, .userInfo__Email, .userInfo__Password, .userInfo__Specialty {
                     display: flex;
                     gap: 10px;
+                    width: 100%;
 
                     p {
                         align-self: center;
                         font-size: 20px;
+                    }
+
+                    i {
+                        cursor: pointer;
                     }
                 }
 
@@ -119,6 +164,62 @@
             
                     .userInfo {
                         width: 580px;
+
+                        .userInfo__Name {
+                            .userInfo__Name__edit {
+                                display: flex;
+
+                                input {
+                                    width: 200px;
+                                }
+
+                                .userInfo__Name__edit__SubmitBtn {
+                                    width: 100px;
+                                }
+                            }
+                        }
+
+                        .userInfo__Email {
+                            .userInfo__Email__edit {    
+                                display: flex;
+
+                                input {
+                                    width: 200px;
+                                }
+
+                                .userInfo__Email__edit__SubmitBtn {
+                                    width: 100px;
+                                }
+                            }
+                        }
+
+                        .userInfo__Password {
+                            .userInfo__Password__edit {
+                                display: flex;
+
+                                input {
+                                    width: 200px;
+                                }
+
+                                .userInfo__Password__edit__SubmitBtn {
+                                    width: 100px;
+                                }
+                            }
+                        }
+
+                        .userInfo__Specialty {
+                            .userInfo__Specialty__edit {    
+                                display: flex;
+
+                                input {
+                                    width: 200px;
+                                }
+
+                                .userInfo__Specialty__edit__SubmitBtn {
+                                    width: 100px;
+                                }
+                            }
+                        }
                     }
 
                     .experience {

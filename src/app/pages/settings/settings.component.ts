@@ -14,6 +14,11 @@ export class SettingsComponent {
   mentorBaseLocal : any[] = []
   currentUser: any
   currentUserInDatabase : any
+  shouldEdit: boolean[] = [false, false, false, false]
+  newName: string = ''
+  newEmail: string = ''
+  newPassword: string = ''
+  newSpecialty: string = ''
 
   noSpamValidator() : ValidatorFn {
     return (control: AbstractControl) : ValidationErrors | null => {
@@ -43,6 +48,10 @@ export class SettingsComponent {
       const res = await this.mentors.getMentorById(id)
       console.log(res)
       this.currentUser = res
+      this.newName = this.currentUser.name
+      this.newEmail = this.currentUser.email
+      this.newPassword = this.currentUser.password
+      this.newSpecialty = this.currentUser.position
     }
   }
 
@@ -56,5 +65,22 @@ export class SettingsComponent {
     const experienceValue = this.experience.value
     console.log('Experience added:', experienceValue);
     await this.mentors.addMentorExperience(this.currentUser._id, experienceValue)
+  }
+
+  async editProfile(mentorId: string, property: string, replacement: any) {
+    console.log(property)
+    console.log(replacement)
+    if (property && replacement) {
+      await this.mentors.editMentorProfile(mentorId, property, replacement)
+      window.location.reload()
+    } else {
+      console.log("Invalid property and replacement.")
+    }
+  }
+
+  edit(index: number) {
+    if (index !== -1 && index < this.shouldEdit.length) {
+      this.shouldEdit[index] = !this.shouldEdit[index]
+    }
   }
 }

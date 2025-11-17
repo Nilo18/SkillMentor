@@ -111,6 +111,23 @@ export class MentorsServiceService {
       }
     }
 
+    async editMentorProfile(mentorId: string, property: string, replacement: any) {
+      try {
+        const token = this.retrieveToken();
+        const headers = this.formatTokenAsHeader(token)
+        const body = {
+          mentorId: mentorId,
+          property: property,
+          replacement: replacement
+        }
+        const res = await firstValueFrom(this.http.patch(`${this.baseURL}/mentors/profile`, body, {headers}))
+        console.log(res)
+      } catch (err) {
+        console.log(`Failed to edit mentor profile: ${err}`)
+        throw err
+      }
+    }
+
     // Utility method for retrieving token from localStorage
     retrieveToken() {
       const stored = localStorage.getItem('seefAccessToken')
