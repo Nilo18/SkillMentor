@@ -4,8 +4,10 @@
         <!-- <h1 >SeeFuture</h1> ცარიელია რო ჰოუმზე გადავიდეს -->
         <div class="leftSection"> 
             <ng-container *ngIf="accessToken; else showLoggedOut">
-                <img [src]="userImage" alt="Profile" class="profile-img" (click)="navigateToTheSettingsPage()"/>
-                <button (click)="logout()" class="MentorBtn-Green">გამოსვლა</button>
+                <img [src]="userImage" alt="Profile" class="profile-img" (click)="navigateToTheProfilePage()"/>
+                <img src="assets/settingsIcon3.png" alt="Settings icon" class="settingsIcon" draggable="false" 
+                (click)="navigateToTheSettingsPage()">
+                <img src="assets/logoutIcon.png" alt="Logout icon" class="logoutIcon" draggable="false" (click)="logout()">
             </ng-container>
             
             <ng-template #showLoggedOut>

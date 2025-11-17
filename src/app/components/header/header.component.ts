@@ -45,4 +45,8 @@ export class HeaderComponent {
   navigateToTheSettingsPage() {
     this.router.navigate(['/settings', this.userId])
   }
+
+  navigateToTheProfilePage() {
+    this.router.navigate(['/mentor', this.userId])
+  }
 }
