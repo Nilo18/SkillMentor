@@ -23,6 +23,7 @@ import { CountUpModule } from 'ngx-countup';
 import { SliderComponent } from './components/slider/slider.component';
 import { HttpClientModule } from '@angular/common/http';
 import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
+import { SuccessPageComponent } from './pages/success-page/success-page.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { VerifyEmailComponent } from './pages/verify-email/verify-email.componen
     StatisticsComponent,
     SliderComponent,
     VerifyEmailComponent,
+    SuccessPageComponent,
   ],
   imports: [
     BrowserModule,

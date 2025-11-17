@@ -7,12 +7,14 @@ import { MentorsComponent } from './pages/mentors/mentors.component';
 import { MentorComponent } from './pages/mentor/mentor.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
+import { SuccessPageComponent } from './pages/success-page/success-page.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'mentors', component: MentorsComponent },
+  { path: 'success', component: SuccessPageComponent},
   { path: 'mentor/:id', component: MentorComponent },
   { path: 'settings/:id', component: SettingsComponent },
   { path: 'verify-email/:token', component: VerifyEmailComponent },
