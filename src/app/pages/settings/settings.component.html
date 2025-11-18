@@ -3,77 +3,78 @@
     <div class="settings">
         <div class="userInfo" *ngIf="currentUser">
             <img [src]="currentUser.image" alt="Profile Image" class="profile-img"/>
-            <div class="userInfo__Name">
-                <h2>სახელი:</h2>
-                <ng-container *ngIf="!shouldEdit[0]; else editUsername">
-                    <h2>{{ currentUser.name }}</h2>
-                </ng-container>
-                
-                <ng-template #editUsername>
-                    <div class="userInfo__Name__edit">
-                        <input type="text" placeholder="ახალი სახელი" [value]="currentUser.name" [(ngModel)]="newName">
-                        <button class="MentorBtn-Green userInfo__Name__edit__SubmitBtn" 
-                        (click)="editProfile(currentUser._id, 'name', newName)">
-                            შეცვლა
-                        </button>
-                    </div>
-                </ng-template>
-                <i class="fa-solid fa-pen-to-square" (click)="edit(0)"></i>   
+            <div class="userInfo__Content">
+                <div class="userInfo__Name">
+                    <h2>სახელი:</h2>
+                    <ng-container *ngIf="!shouldEdit[0]; else editUsername">
+                        <h2 class="userInfo__DataHolder">{{ currentUser.name }}</h2>
+                    </ng-container>
+                    
+                    <ng-template #editUsername>
+                        <div class="userInfo__Name__edit">
+                            <input type="text" placeholder="ახალი სახელი" [value]="currentUser.name" [(ngModel)]="newName">
+                            <button class="MentorBtn-Green userInfo__Name__edit__SubmitBtn" 
+                            (click)="editProfile(currentUser._id, 'name', newName)">
+                                შეცვლა
+                            </button>
+                        </div>
+                    </ng-template>
+                    <i class="fa-solid fa-pen-to-square" (click)="edit(0)"></i>   
+                </div>
+                <div class="userInfo__Email">
+                    <h2>ელ–ფოსტა:</h2>
+                    <ng-container *ngIf="!shouldEdit[1]; else editEmail">
+                        <h2 class="userInfo__DataHolder">{{ currentUser.email }}</h2>
+                    </ng-container>
+                    
+                    <ng-template #editEmail>
+                        <div class="userInfo__Email__edit">
+                            <input type="text" placeholder="ახალი ელ–ფოსტა" [value]="currentUser.email" [(ngModel)]="newEmail">
+                            <button class="MentorBtn-Green userInfo__Email__edit__SubmitBtn" 
+                            (click)="editProfile(currentUser._id, 'email', newEmail)">
+                                შეცვლა
+                            </button>
+                        </div>
+                    </ng-template>
+                    <i class="fa-solid fa-pen-to-square" (click)="edit(1)"></i>   
+                </div>
+                <div class="userInfo__Password">
+                    <h2>პაროლი:</h2>
+                    <ng-container *ngIf="!shouldEdit[2]; else editPassword">
+                        <h2 class="userInfo__DataHolder">{{ '•'.repeat(16) }}</h2>
+                    </ng-container>
+                    
+                    <ng-template #editPassword>
+                        <div class="userInfo__Password__edit">
+                            <input type="text" placeholder="ახალი პაროლი" [value]="currentUser.password" [(ngModel)]="newPassword">
+                            <button class="MentorBtn-Green userInfo__Password__edit__SubmitBtn" 
+                            (click)="editProfile(currentUser._id, 'password', newPassword)">
+                                შეცვლა
+                            </button>
+                        </div>
+                    </ng-template>
+                    
+                    <i class="fa-solid fa-pen-to-square" (click)="edit(2)"></i>   
+                </div>
+                <div class="userInfo__Specialty">
+                    <h2>პროფესია:</h2>
+                    
+                    <ng-container *ngIf="!shouldEdit[3]; else editSpecialty">
+                        <h2 class="userInfo__DataHolder">{{ currentUser.position }}</h2>
+                    </ng-container>
+                    
+                    <ng-template #editSpecialty>
+                        <div class="userInfo__Specialty__edit">
+                            <input type="text" placeholder="ახალი პროფესია" [value]="currentUser.position" [(ngModel)]="newSpecialty">
+                            <button class="MentorBtn-Green userInfo__Specialty__edit__SubmitBtn"
+                            (click)="editProfile(currentUser._id, 'position', newSpecialty)">
+                                შეცვლა
+                            </button>
+                        </div>
+                    </ng-template>
+                    <i class="fa-solid fa-pen-to-square" (click)="edit(3)"></i>   
+                </div>
             </div>
-            <div class="userInfo__Email">
-                <h2>ელ–ფოსტა:</h2>
-                <ng-container *ngIf="!shouldEdit[1]; else editEmail">
-                    <h2>{{ currentUser.email }}</h2>
-                </ng-container>
-                
-                <ng-template #editEmail>
-                    <div class="userInfo__Email__edit">
-                        <input type="text" placeholder="ახალი ელ–ფოსტა" [value]="currentUser.email" [(ngModel)]="newEmail">
-                        <button class="MentorBtn-Green userInfo__Email__edit__SubmitBtn" 
-                        (click)="editProfile(currentUser._id, 'email', newEmail)">
-                            შეცვლა
-                        </button>
-                    </div>
-                </ng-template>
-                <i class="fa-solid fa-pen-to-square" (click)="edit(1)"></i>   
-            </div>
-            <div class="userInfo__Password">
-                <h2>პაროლი:</h2>
-                <ng-container *ngIf="!shouldEdit[2]; else editPassword">
-                    <h2>{{ '•'.repeat(16) }}</h2>
-                </ng-container>
-                
-                <ng-template #editPassword>
-                    <div class="userInfo__Password__edit">
-                        <input type="text" placeholder="ახალი პაროლი" [value]="currentUser.password" [(ngModel)]="newPassword">
-                        <button class="MentorBtn-Green userInfo__Password__edit__SubmitBtn" 
-                        (click)="editProfile(currentUser._id, 'password', newPassword)">
-                            შეცვლა
-                        </button>
-                    </div>
-                </ng-template>
-                
-                <i class="fa-solid fa-pen-to-square" (click)="edit(2)"></i>   
-            </div>
-            <div class="userInfo__Specialty">
-                <h2>პროფესია:</h2>
-                
-                <ng-container *ngIf="!shouldEdit[3]; else editSpecialty">
-                    <h2>{{ currentUser.position }}</h2>
-                </ng-container>
-                
-                <ng-template #editSpecialty>
-                    <div class="userInfo__Specialty__edit">
-                        <input type="text" placeholder="ახალი პროფესია" [value]="currentUser.position" [(ngModel)]="newSpecialty">
-                        <button class="MentorBtn-Green userInfo__Specialty__edit__SubmitBtn"
-                        (click)="editProfile(currentUser._id, 'position', newSpecialty)">
-                            შეცვლა
-                        </button>
-                    </div>
-                </ng-template>
-                <i class="fa-solid fa-pen-to-square" (click)="edit(3)"></i>   
-            </div>
-            
         </div>
         <div class="experience">
             <ul *ngFor="let Experience of experiences">
@@ -103,7 +104,12 @@
                         <label for="Description">აღწერა</label>
                         <textarea name="Description" formControlName="description"></textarea>
                         <p class="error">{{ (experience.get('description')?.touched && experience.get('description')?.invalid)?
-                            'გთხოვთ შეიყვანოთ აღწერილობა (10–100 სიმბოლო)' : ''}}</p>
+                            'გთხოვთ შეიყვანოთ აღწერილობა (10–100 სიმბოლო)' : ''}}
+                        </p>
+                    </div>
+                    <div class="resume__topController">
+                        <input type="checkbox" formControlName="isOnTop">
+                        <p>ტოპ გამოცდილებებში დამატება</p>
                     </div>
                     <div class="resume__ButtonHolder">
                         <button class="MentorBtn-Green settingsBtn">დამატება</button>

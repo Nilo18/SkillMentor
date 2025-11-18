@@ -87,6 +87,7 @@ export class MentorsServiceService {
           
           const res = await firstValueFrom(this.http.patch(`${this.baseURL}/mentors/experiences`, body, {headers}))
           console.log(res)
+          return res
         } else {
           console.log("Didn't add the experience beceause the token was missing.")
           return;

@@ -36,11 +36,16 @@ export class SettingsComponent {
     this.experience = fb.group({
       company: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
       position: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(150)]]
+      description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(150)]],
+      isOnTop: [false, Validators.required]
     })
   }
 
   textIsSpammy: boolean = false;
+
+  // showTop() {
+  //   console.log("isOnTop's value is: " + this.experience.value.isOnTop)
+  // }
 
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id')
@@ -62,14 +67,33 @@ export class SettingsComponent {
       return // Return to exit the function when showing errors
     }
 
-    const experienceValue = this.experience.value
-    console.log('Experience added:', experienceValue);
-    await this.mentors.addMentorExperience(this.currentUser._id, experienceValue)
+    try {
+      const experienceValue = this.experience.value
+      console.log('Experience added:', experienceValue);
+      const res = await this.mentors.addMentorExperience(this.currentUser._id, experienceValue)
+
+      const stored = localStorage.getItem('availableTopSlots')
+      let topSlots = stored ? JSON.parse(stored) : null
+
+      // If there are available top slots and the user decides to add a top experience, decrease the top slots counter
+      // To avoid data mismatching
+      if (res && topSlots && topSlots > 0) {
+        topSlots--
+        localStorage.setItem('availableTopSlots', JSON.stringify(topSlots))
+      }      
+    } catch (error) {  
+      console.log("Couldn't add experience: " + error)
+    }
   }
 
   async editProfile(mentorId: string, property: string, replacement: any) {
     console.log(property)
     console.log(replacement)
+    // If (property === 'image' && replacement === 'none')  { 
+    //  const res = await this.mentors.editMentorProfile(mentorId, property, replacement)
+    //  const newProfileImage = res.image
+    //  emit the new profile image to the header
+    // }
     if (property && replacement) {
       await this.mentors.editMentorProfile(mentorId, property, replacement)
       window.location.reload()
