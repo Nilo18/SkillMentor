@@ -12,3 +12,16 @@
         background-position: 200% 0;
     }
 }
+
+@mixin FlexContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin FlexContainerColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

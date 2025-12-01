@@ -26,6 +26,13 @@ interface MentorsResponse {
   mentorsData: Mentor[]
 }
 
+interface EditOptions {
+  mentorId: string
+  property: string
+  replacement: string
+  image?: string | ArrayBuffer | null
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -112,19 +119,23 @@ export class MentorsServiceService {
       }
     }
 
-    async editMentorProfile(mentorId: string, property: string, replacement: any) {
+    async editMentorProfile(body: FormData) : Promise<any> {
       try {
         const token = this.retrieveToken();
         const headers = this.formatTokenAsHeader(token)
-        const body = {
-          mentorId: mentorId,
-          property: property,
-          replacement: replacement
-        }
-        const res = await firstValueFrom(this.http.patch(`${this.baseURL}/mentors/profile`, body, {headers}))
+        // const body: EditOptions = {
+        //   mentorId: mentorId,
+        //   property: property,
+        //   replacement: replacement,
+        //   image: image
+        // // }
+        // console.log("The body is: ")
+        // console.log(body)
+        const res = await firstValueFrom(this.http.patch<any>(`${this.baseURL}/mentors/profile`, body, {headers}))
         console.log(res)
       } catch (err) {
-        console.log(`Failed to edit mentor profile: ${err}`)
+        console.log(`Failed to edit mentor profile: `)
+        console.log(err)
         throw err
       }
     }

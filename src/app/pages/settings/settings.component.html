@@ -1,78 +1,111 @@
 <app-header></app-header>
 <div class="cont">
     <div class="settings">
-        <div class="userInfo" *ngIf="currentUser">
-            <img [src]="currentUser.image" alt="Profile Image" class="profile-img"/>
+        <div class="userInfo">
+            <div class="userInfo__ProfImg">
+                <ng-container *ngIf="!isLoading; else showLoadingImage">
+                    <img [src]="currentUser.image" alt="Profile Image" class="profile-img" (click)="triggerImageUpload()"/>
+                    <input type="file" id="userInfo__ProfImg__Input" (change)="changeProfileImage($event, currentUser._id)" 
+                    hidden accept=".jpg, .jpeg, .png">
+                </ng-container>
+
+                <ng-template #showLoadingImage>
+                    <div class="skeleton-img"></div>
+                </ng-template>
+            </div>
             <div class="userInfo__Content">
                 <div class="userInfo__Name">
-                    <h2>სახელი:</h2>
-                    <ng-container *ngIf="!shouldEdit[0]; else editUsername">
-                        <h2 class="userInfo__DataHolder">{{ currentUser.name }}</h2>
+                    <ng-container *ngIf="!isLoading; else showLoadingName">
+                        <h2>სახელი:</h2>
+                        <ng-container *ngIf="!shouldEdit[0]; else editUsername">
+                            <h2 class="userInfo__DataHolder">{{ currentUser.name }}</h2>
+                        </ng-container>
+                        
+                        <ng-template #editUsername>
+                            <div class="userInfo__Name__edit">
+                                <input type="text" placeholder="ახალი სახელი" [value]="currentUser.name" [(ngModel)]="newName">
+                                <button class="MentorBtn-Green userInfo__Name__edit__SubmitBtn" 
+                                (click)="editProfile(currentUser._id, 'name', newName)">
+                                    შეცვლა
+                                </button>
+                            </div>
+                        </ng-template>
+                        <i class="fa-solid fa-pen-to-square" (click)="edit(0)"></i>   
                     </ng-container>
-                    
-                    <ng-template #editUsername>
-                        <div class="userInfo__Name__edit">
-                            <input type="text" placeholder="ახალი სახელი" [value]="currentUser.name" [(ngModel)]="newName">
-                            <button class="MentorBtn-Green userInfo__Name__edit__SubmitBtn" 
-                            (click)="editProfile(currentUser._id, 'name', newName)">
-                                შეცვლა
-                            </button>
-                        </div>
+
+                    <ng-template #showLoadingName>
+                        <div class="skeleton-text"></div>
                     </ng-template>
-                    <i class="fa-solid fa-pen-to-square" (click)="edit(0)"></i>   
                 </div>
                 <div class="userInfo__Email">
-                    <h2>ელ–ფოსტა:</h2>
-                    <ng-container *ngIf="!shouldEdit[1]; else editEmail">
-                        <h2 class="userInfo__DataHolder">{{ currentUser.email }}</h2>
+                    <ng-container *ngIf="!isLoading; else showLoadingEmail">
+                        <h2>ელფოსტა:</h2>
+                        <ng-container *ngIf="!shouldEdit[1]; else editEmail">
+                            <h2 class="userInfo__DataHolder">{{ currentUser.email }}</h2>
+                        </ng-container>
+                        
+                        <ng-template #editEmail>
+                            <div class="userInfo__Email__edit">
+                                <input type="text" placeholder="ახალი ელ–ფოსტა" [value]="currentUser.email" [(ngModel)]="newEmail">
+                                <button class="MentorBtn-Green userInfo__Email__edit__SubmitBtn" 
+                                (click)="editProfile(currentUser._id, 'email', newEmail)">
+                                    შეცვლა
+                                </button>
+                            </div>
+                        </ng-template>
+                        <i class="fa-solid fa-pen-to-square" (click)="edit(1)"></i> 
                     </ng-container>
-                    
-                    <ng-template #editEmail>
-                        <div class="userInfo__Email__edit">
-                            <input type="text" placeholder="ახალი ელ–ფოსტა" [value]="currentUser.email" [(ngModel)]="newEmail">
-                            <button class="MentorBtn-Green userInfo__Email__edit__SubmitBtn" 
-                            (click)="editProfile(currentUser._id, 'email', newEmail)">
-                                შეცვლა
-                            </button>
-                        </div>
+
+                    <ng-template #showLoadingEmail>
+                        <div class="skeleton-text"></div>
                     </ng-template>
-                    <i class="fa-solid fa-pen-to-square" (click)="edit(1)"></i>   
                 </div>
                 <div class="userInfo__Password">
-                    <h2>პაროლი:</h2>
-                    <ng-container *ngIf="!shouldEdit[2]; else editPassword">
-                        <h2 class="userInfo__DataHolder">{{ '•'.repeat(16) }}</h2>
-                    </ng-container>
-                    
-                    <ng-template #editPassword>
-                        <div class="userInfo__Password__edit">
-                            <input type="text" placeholder="ახალი პაროლი" [value]="currentUser.password" [(ngModel)]="newPassword">
-                            <button class="MentorBtn-Green userInfo__Password__edit__SubmitBtn" 
-                            (click)="editProfile(currentUser._id, 'password', newPassword)">
-                                შეცვლა
-                            </button>
-                        </div>
-                    </ng-template>
-                    
-                    <i class="fa-solid fa-pen-to-square" (click)="edit(2)"></i>   
+                    <ng-container *ngIf="!isLoading; else showLoadingPassword">
+                        <h2>პაროლი:</h2>
+                        <ng-container *ngIf="!shouldEdit[2]; else editPassword">
+                            <h2 class="userInfo__DataHolder">{{ '•'.repeat(16) }}</h2>
+                        </ng-container>
+                        
+                        <ng-template #editPassword>
+                            <div class="userInfo__Password__edit">
+                                <input type="text" placeholder="ახალი პაროლი" [value]="currentUser.password" [(ngModel)]="newPassword">
+                                <button class="MentorBtn-Green userInfo__Password__edit__SubmitBtn" 
+                                (click)="editProfile(currentUser._id, 'password', newPassword)">
+                                    შეცვლა
+                                </button>
+                            </div>
+                        </ng-template>
+                        
+                        <i class="fa-solid fa-pen-to-square" (click)="edit(2)"></i>  
+                 </ng-container>
+
+                 <ng-template #showLoadingPassword>
+                    <div class="skeleton-text"></div>
+                 </ng-template>
                 </div>
                 <div class="userInfo__Specialty">
-                    <h2>პროფესია:</h2>
-                    
-                    <ng-container *ngIf="!shouldEdit[3]; else editSpecialty">
-                        <h2 class="userInfo__DataHolder">{{ currentUser.position }}</h2>
+                    <ng-container *ngIf="!isLoading; else showLoadingSpecialty">
+                        <h2>პროფესია:</h2>
+                            <ng-container *ngIf="!shouldEdit[3]; else editSpecialty">
+                                <h2 class="userInfo__DataHolder">{{ currentUser.position }}</h2>
+                            </ng-container>
+                            
+                            <ng-template #editSpecialty>
+                                <div class="userInfo__Specialty__edit">
+                                    <input type="text" placeholder="ახალი პროფესია" [value]="currentUser.position" [(ngModel)]="newSpecialty">
+                                    <button class="MentorBtn-Green userInfo__Specialty__edit__SubmitBtn"
+                                    (click)="editProfile(currentUser._id, 'position', newSpecialty)">
+                                        შეცვლა
+                                    </button>
+                                </div>
+                            </ng-template>
+                            <i class="fa-solid fa-pen-to-square" (click)="edit(3)"></i>   
                     </ng-container>
-                    
-                    <ng-template #editSpecialty>
-                        <div class="userInfo__Specialty__edit">
-                            <input type="text" placeholder="ახალი პროფესია" [value]="currentUser.position" [(ngModel)]="newSpecialty">
-                            <button class="MentorBtn-Green userInfo__Specialty__edit__SubmitBtn"
-                            (click)="editProfile(currentUser._id, 'position', newSpecialty)">
-                                შეცვლა
-                            </button>
-                        </div>
+
+                    <ng-template #showLoadingSpecialty>
+                        <div class="skeleton-text"></div>
                     </ng-template>
-                    <i class="fa-solid fa-pen-to-square" (click)="edit(3)"></i>   
                 </div>
             </div>
         </div>

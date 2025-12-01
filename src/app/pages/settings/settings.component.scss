@@ -1,3 +1,5 @@
+@import '../../styles/mixins.scss';
+
 .cont {
     background-color: rgb(244, 244, 244);
     
@@ -17,6 +19,10 @@
                 flex-direction: column;
                 gap: 40px;
                 margin-top: 150px;
+
+                .userInfo__ProfImg {
+                    @include FlexContainer;
+                }
 
                 img {
                     object-fit: cover;
@@ -40,6 +46,14 @@
 
                             input {
                                 width: 300px;
+                                height: 30px;
+                            }
+
+                            button {
+                                height: 30px;
+                                padding: 5px;
+                                width: 100px;
+                                text-align: center;
                             }
                         }
                     }
@@ -50,17 +64,33 @@
 
                             input {
                                 width: 300px;
+                                height: 30px;
+                            }
+
+                            button {
+                                height: 30px;
+                                padding: 5px;
+                                width: 100px;
+                                text-align: center;
                             }
                         }
                     }
 
                     .userInfo__Password {
                         .userInfo__Password__edit {
-                                display: flex;
+                            display: flex;
 
-                                input {
-                                    width: 300px;
-                                }
+                            input {
+                                width: 300px;
+                                height: 30px;
+                            }
+
+                            button {
+                                height: 30px;
+                                padding: 5px;
+                                width: 100px;
+                                text-align: center;
+                            }
                         }
                     }
 
@@ -70,6 +100,14 @@
 
                             input {
                                 width: 300px;
+                                height: 30px;
+                            }
+
+                            button {
+                                height: 30px;
+                                padding: 5px;
+                                width: 100px;
+                                text-align: center;
                             }
                         }
                     }
@@ -80,8 +118,16 @@
                         gap: 10px;
                         width: 100%;
 
+                        // h2 {
+                        //     width: 100%;
+                        // }
+
                         .userInfo__DataHolder {
                             color: gray;
+                            white-space: normal;
+                            overflow-wrap: break-word;
+                            width: 100%;
+                            // text-align: center;
                         }
 
                         p {
@@ -189,62 +235,71 @@
                     .userInfo {
                         width: 580px;
 
-                        .userInfo__Name {
-                            .userInfo__Name__edit {
-                                display: flex;
-
-                                input {
-                                    width: 200px;
-                                }
-
-                                .userInfo__Name__edit__SubmitBtn {
-                                    width: 100px;
+                        .userInfo__Content {
+                            .userInfo__Name, .userInfo__Email, .userInfo__Password, .userInfo__Specialty {
+                                h2 {
+                                    font-size: 20px;
                                 }
                             }
-                        }
 
-                        .userInfo__Email {
-                            .userInfo__Email__edit {    
-                                display: flex;
+                                .userInfo__Name {
+                                    .userInfo__Name__edit {
+                                        display: flex;
 
-                                input {
-                                    width: 200px;
+                                        input {
+                                            width: 200px;
+                                        }
+
+                                        .userInfo__Name__edit__SubmitBtn {
+                                            width: 100px;
+                                        }
+                                    }
                                 }
 
-                                .userInfo__Email__edit__SubmitBtn {
-                                    width: 100px;
+                                .userInfo__Email {
+                                    .userInfo__Email__edit {    
+                                        display: flex;
+
+                                        input {
+                                            width: 200px;
+                                        }
+
+                                        .userInfo__Email__edit__SubmitBtn {
+                                            width: 100px;
+                                        }
+                                    }
+                                }
+
+                                .userInfo__Password {
+                                    .userInfo__Password__edit {
+                                        display: flex;
+
+                                        input {
+                                            width: 200px;
+                                        }
+
+                                        .userInfo__Password__edit__SubmitBtn {
+                                            width: 100px;
+                                        }
+                                    }
+                                }
+
+                                .userInfo__Specialty {
+                                    .userInfo__Specialty__edit {    
+                                        display: flex;
+
+                                        input {
+                                            width: 200px;
+                                        }
+
+                                        .userInfo__Specialty__edit__SubmitBtn {
+                                            width: 100px;
+                                        }
+                                    }
                                 }
                             }
+
                         }
-
-                        .userInfo__Password {
-                            .userInfo__Password__edit {
-                                display: flex;
-
-                                input {
-                                    width: 200px;
-                                }
-
-                                .userInfo__Password__edit__SubmitBtn {
-                                    width: 100px;
-                                }
-                            }
-                        }
-
-                        .userInfo__Specialty {
-                            .userInfo__Specialty__edit {    
-                                display: flex;
-
-                                input {
-                                    width: 200px;
-                                }
-
-                                .userInfo__Specialty__edit__SubmitBtn {
-                                    width: 100px;
-                                }
-                            }
-                        }
-                    }
 
                     .experience {
                         width: 580px;
@@ -272,6 +327,80 @@
                         height: 100px;
                     }
                     
+
+                    .userInfo__Content {
+
+                    .userInfo__Name, .userInfo__Email, .userInfo__Password, .userInfo__Specialty {
+                            h2 {
+                                font-size: 20px;
+                            }
+
+                            .userInfo__DataHolder {
+                                color: gray;
+                                text-align: center;
+                            }
+                        }
+
+                        .userInfo__Name {
+                            .userInfo__Name__edit {
+                                display: flex;
+
+                                input {
+                                    width: 100px;
+                                }
+
+                                .userInfo__Name__edit__SubmitBtn {
+                                    width: 65px;
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+
+                        .userInfo__Email {
+                            .userInfo__Email__edit {    
+                                display: flex;
+
+                                input {
+                                    width: 100px;
+                                }
+
+                                .userInfo__Email__edit__SubmitBtn {
+                                    width: 65px;
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+
+                        .userInfo__Password {
+                            .userInfo__Password__edit {
+                                display: flex;
+
+                                input {
+                                    width: 100px;
+                                }
+
+                                .userInfo__Password__edit__SubmitBtn {
+                                    width: 65px;
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+
+                        .userInfo__Specialty {
+                            .userInfo__Specialty__edit {    
+                                display: flex;
+
+                                input {
+                                    width: 100px;
+                                }
+
+                                .userInfo__Specialty__edit__SubmitBtn {
+                                    width: 65px;
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+                    }
 
                     .userInfo__Name, .userInfo__Email, .userInfo__Password, .userInfo__Specialty {
                         flex-direction: column;

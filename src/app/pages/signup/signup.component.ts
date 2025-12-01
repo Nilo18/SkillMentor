@@ -115,6 +115,7 @@ export class SignupComponent {
     fileInput?.click();
   }
 
+  // *** Come back here if something goes wrong on sign up page image upload ***
   toggleImageError(file: File | null) {
     if (!file) return;
 
@@ -125,20 +126,24 @@ export class SignupComponent {
     if (!allowedTypes.includes(file.type)) {
       this.fileError = 'გთხოვთ ატვირთეთ მხოლოდ JPG ან PNG ტიპის სურათი.';
       console.log(this.fileError)
-    } else if (file.size > maxSize) {
+    }
+    
+    if (file.size > maxSize) {
       this.fileError = 'ფაილი არ უნდა აღემატებოდეს 2MB-ს.';
       console.log(this.fileError)
-    } else {
+    } 
+    
+    // else {
       this.selectedImg = file
       this.selectedFileName = file.name;
       this.imageUploaded = true;
 
       const reader = new FileReader();
       reader.onload = () => {
-      this.profileImage = reader.result;
-    };
+        this.profileImage = reader.result;
+      };
       reader.readAsDataURL(file);
-    }
+    // }
   }
 
   onFileSelected(event: Event) {

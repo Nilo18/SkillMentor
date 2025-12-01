@@ -19,6 +19,10 @@ export class SettingsComponent {
   newEmail: string = ''
   newPassword: string = ''
   newSpecialty: string = ''
+  allowedImgTypes: string[] = ['image/jpg', 'image/jpeg', 'image/png']
+  maxFileSize: number = 2 * 1024 * 1024
+  newProfileImage: File | null = null
+  isLoading: boolean = true
 
   noSpamValidator() : ValidatorFn {
     return (control: AbstractControl) : ValidationErrors | null => {
@@ -57,6 +61,7 @@ export class SettingsComponent {
       this.newEmail = this.currentUser.email
       this.newPassword = this.currentUser.password
       this.newSpecialty = this.currentUser.position
+      this.isLoading = false
     }
   }
 
@@ -89,13 +94,26 @@ export class SettingsComponent {
   async editProfile(mentorId: string, property: string, replacement: any) {
     console.log(property)
     console.log(replacement)
-    // If (property === 'image' && replacement === 'none')  { 
-    //  const res = await this.mentors.editMentorProfile(mentorId, property, replacement)
-    //  const newProfileImage = res.image
+    const formData = new FormData()
+    formData.append('mentorId', mentorId)
+    formData.append('property', property)
+    formData.append('replacement', replacement)
+    console.log('mentorId: ', mentorId)
+    console.log('property: ', property)
+    console.log('replacement: ', replacement)
+    console.log('image: ', this.newProfileImage)
+    if (property === 'image' && this.newProfileImage)  {
+      formData.append('image', this.newProfileImage)
+      await this.mentors.editMentorProfile(formData)
+      window.location.reload()
+      // const newProfileImage = res.newImage
+      // console.log(newProfileImage)
+      return  
     //  emit the new profile image to the header
-    // }
+    }
+
     if (property && replacement) {
-      await this.mentors.editMentorProfile(mentorId, property, replacement)
+      await this.mentors.editMentorProfile(formData)
       window.location.reload()
     } else {
       console.log("Invalid property and replacement.")
@@ -106,5 +124,39 @@ export class SettingsComponent {
     if (index !== -1 && index < this.shouldEdit.length) {
       this.shouldEdit[index] = !this.shouldEdit[index]
     }
+  }
+
+  triggerImageUpload() {
+    const input = document.getElementById('userInfo__ProfImg__Input') as HTMLInputElement
+    input?.click()
+  }
+
+  async changeProfileImage(event: Event, mentorId: string) {
+    const input = event.target as HTMLInputElement
+    const file = input.files && input.files[0]
+    console.log(file)
+    console.log(file?.name)
+    console.log(file?.type)
+    console.log(mentorId)
+
+    if (file && !this.allowedImgTypes.includes(file?.type)) {
+      console.log('This type of file is not allowed.')
+      return;
+    }
+
+    if (file && file?.size > this.maxFileSize) {
+      console.log('The file size exceeds max capacity allowed.')
+      return
+    }
+
+    // let newProfileImage
+    // const reader = new FileReader()
+    // reader.onload = () => {
+    //   this.newProfileImage = reader.result
+    // }
+    // reader.readAsDataURL(file)
+    this.newProfileImage = file
+    console.log("The new profile image was read as: ",  this.newProfileImage)
+    await this.editProfile(mentorId, 'image', 'none')
   }
 }
