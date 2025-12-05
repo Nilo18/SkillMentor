@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class BackendUrlHolderService {
-  private baseURL = 'https://seefuture-back-a044db68f5d8.herokuapp.com'
+  private baseURL = 'https://skillmentor-back.onrender.com'
 
   getBaseURL() {
     return this.baseURL
