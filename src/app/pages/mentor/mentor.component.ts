@@ -69,7 +69,15 @@ export class MentorComponent {
         }
         // If the user viewing the page is NOT logged in, only show top 3 of their experiences 
         else {
-          this.topExperiences = this.selectedMentor.experiences
+          for (let experience of this.selectedMentor.experiences) {
+            // Only move 3 marked experiences to topExperiences
+            if (experience.isOnTop && this.spliceCounter < 3) {
+              this.topExperiences.push(experience)
+              this.spliceCounter++
+            }
+          }
+          // this.topExperiences = this.selectedMentor.experiences.slice(0, 3)
+          console.log("Initialized top experiences on default:", this.topExperiences)
           this.shouldBeAbleToDelete = false
         }
         console.log("The experiencesLocal array is: ", this.experiencesLocal)

@@ -104,7 +104,9 @@ export class SettingsComponent {
     console.log('image: ', this.newProfileImage)
     if (property === 'image' && this.newProfileImage)  {
       formData.append('image', this.newProfileImage)
-      await this.mentors.editMentorProfile(formData)
+      const res = await this.mentors.editMentorProfile(formData)
+      console.log(res)
+      localStorage.setItem('seefAccessToken', JSON.stringify(res.accessToken))
       window.location.reload()
       // const newProfileImage = res.newImage
       // console.log(newProfileImage)
@@ -113,7 +115,9 @@ export class SettingsComponent {
     }
 
     if (property && replacement) {
-      await this.mentors.editMentorProfile(formData)
+      const res = await this.mentors.editMentorProfile(formData)
+      console.log(res)  
+      localStorage.setItem('seefAccessToken', JSON.stringify(res.accessToken))
       window.location.reload()
     } else {
       console.log("Invalid property and replacement.")

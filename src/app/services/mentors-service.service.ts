@@ -133,6 +133,7 @@ export class MentorsServiceService {
         // console.log(body)
         const res = await firstValueFrom(this.http.patch<any>(`${this.baseURL}/mentors/profile`, body, {headers}))
         console.log(res)
+        return res
       } catch (err) {
         console.log(`Failed to edit mentor profile: `)
         console.log(err)
