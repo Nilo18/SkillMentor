@@ -4,7 +4,9 @@ This project began as a hackathon demo and has since evolved with additional fea
 # Tech Stack
 - Frontend: Angular
 - Backend: Express.js, MongoDB
-
+  
+**Please note that the backend is hosted on a free tier web service so initial load time may take a while**
+  
 # Key Features:
 - Mentor registration and profile browsing
 - Search and filtering for mentors by expertise
