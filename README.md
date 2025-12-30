@@ -13,3 +13,5 @@ This project began as a hackathon demo and has since evolved with additional fea
 - Booking simulation
 - Responsive UI for multiple devices
 
+You can visit the website at: [https://skill-mentor-haad.vercel.app/](https://skill-mentor-haad.vercel.app/)
+
