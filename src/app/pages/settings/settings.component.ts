@@ -19,6 +19,9 @@ export class SettingsComponent {
   newEmail: string = ''
   newPassword: string = ''
   newSpecialty: string = ''
+  addedMsg: string = ''
+  errMsg: string = ''
+  gotErr: boolean = false;
   allowedImgTypes: string[] = ['image/jpg', 'image/jpeg', 'image/png']
   maxFileSize: number = 2 * 1024 * 1024
   newProfileImage: File | null = null
@@ -66,42 +69,59 @@ export class SettingsComponent {
   }
 
   async addExperience() {
-    // Show all errors at once instead of separetely
+    // Reset messages
+    this.addedMsg = '';
+    this.errMsg = '';
+    this.gotErr = false;
+
+    // Show all errors at once
     if (this.experience.invalid) {
-      this.experience.markAllAsTouched()
-      return // Return to exit the function when showing errors
+      this.experience.markAllAsTouched();
+      return;
     }
 
     try {
-      const experienceValue = this.experience.value
+      const experienceValue = this.experience.value;
       console.log('Experience added:', experienceValue);
-      const res = await this.mentors.addMentorExperience(this.currentUser._id, experienceValue)
 
-      const stored = localStorage.getItem('availableTopSlots')
-      let topSlots = stored ? JSON.parse(stored) : null
+      const res = await this.mentors.addMentorExperience(
+        this.currentUser._id,
+        experienceValue
+      );
 
-      // If there are available top slots and the user decides to add a top experience, decrease the top slots counter
-      // To avoid data mismatching
-      if (res && topSlots && topSlots > 0) {
-        topSlots--
-        localStorage.setItem('availableTopSlots', JSON.stringify(topSlots))
-      }      
-    } catch (error) {  
-      console.log("Couldn't add experience: " + error)
+      const stored = localStorage.getItem('availableTopSlots');
+      let topSlots: number | null = stored ? JSON.parse(stored) : null;
+
+      // Prevent data mismatch
+      if (res && typeof topSlots === 'number' && topSlots > 0) {
+        topSlots--;
+        localStorage.setItem('availableTopSlots', JSON.stringify(topSlots));
+      }
+
+      if (res) {
+        this.addedMsg = 'წარმატებით დაემატა!';
+        setTimeout(() => {
+          this.addedMsg = '';
+        }, 2000);
+      }
+
+    } catch (error) {
+      console.log("Couldn't add experience:", error);
+      this.gotErr = true;
+      this.errMsg = 'დამატებისას მოხდა შეცდომა.';
+
+      setTimeout(() => {
+        this.errMsg = '';
+        this.gotErr = false;
+      }, 2000);
     }
   }
 
   async editProfile(mentorId: string, property: string, replacement: any) {
-    console.log(property)
-    console.log(replacement)
     const formData = new FormData()
     formData.append('mentorId', mentorId)
     formData.append('property', property)
     formData.append('replacement', replacement)
-    console.log('mentorId: ', mentorId)
-    console.log('property: ', property)
-    console.log('replacement: ', replacement)
-    console.log('image: ', this.newProfileImage)
     if (property === 'image' && this.newProfileImage)  {
       formData.append('image', this.newProfileImage)
       const res = await this.mentors.editMentorProfile(formData)

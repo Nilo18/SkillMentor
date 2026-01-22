@@ -148,6 +148,12 @@
                         <button class="MentorBtn-Green settingsBtn">დამატება</button>
                     </div>
                     <p class="error">{{textIsSpammy? 'გთხოვთ მოერიდოთ სპამს' : ''}}</p>
+                
+                    @if (!gotErr) {
+                        <p style="color: green; height: 10px;">{{ addedMsg }}</p>
+                    } @else {
+                        <p style="color: red; height: 10px;">{{ errMsg }}</p>
+                    }
                 </div>
             </form>
         </div>

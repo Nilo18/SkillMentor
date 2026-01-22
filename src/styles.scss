@@ -116,7 +116,8 @@ ul {
 }
 
 .skeleton-img {
-    width: 150px;
-    height: 150px;
-    @include skeletonFlicker; // Skeleton flicker styles and animations to display before the content loads
+  width: clamp(80px, 20vw, 150px);
+  aspect-ratio: 1 / 1;
+  @include skeletonFlicker;
 }
+

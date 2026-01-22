@@ -73,7 +73,6 @@ export class SliderComponent {
     try {
       const res = await firstValueFrom(this.http.get<Slide[]>(`${this.baseURL}/slider`))
       this.isLoading = false;
-      console.log(res)
       this.slides = res
     } catch (err) {
       console.log("Failed to fetch slides: ", err)
