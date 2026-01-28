@@ -5,13 +5,12 @@ This project began as a hackathon demo and has since evolved with additional fea
 - Frontend: Angular
 - Backend: Express.js, MongoDB
   
-**Please note that the backend is hosted on a free tier web service so initial load time may take a while**
-  
 # Key Features:
 - Mentor registration and profile browsing
 - Search and filtering for mentors by expertise
 - Booking simulation
 - Responsive UI for multiple devices
 
-You can visit the website at: [https://skill-mentor-haad.vercel.app/](https://skill-mentor-haad.vercel.app/)
+# Demo
+https://github.com/user-attachments/assets/f730d837-a7ac-400a-a4dd-9853ff429ad0
 
